@@ -129,6 +129,42 @@ namespace ECommerce.API.Controllers
             return Ok(id.ToString());
         }
 
+        [HttpPost("UploadImage")]
+        public IActionResult UploadImage(IFormFile file)
+        {
+            try
+            {
+                // Check if the file is null
+                if (file == null || file.Length == 0)
+                    return BadRequest("No file uploaded.");
+
+                // Get the file extension
+                var extension = Path.GetExtension(file.FileName);
+
+                // Generate a unique filename
+                var uniqueFileName = Guid.NewGuid().ToString() + extension;
+
+                // Get the path where the file will be saved
+                var imagePath = Path.Combine("wwwroot", "images", "products", uniqueFileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                // Return the path to the saved image
+                var imageUrl = $"~/images/products/{uniqueFileName}";
+                return Ok(new { imageUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
 
         // New endpoint to insert a product into the database
         [HttpPost("InsertProduct")]

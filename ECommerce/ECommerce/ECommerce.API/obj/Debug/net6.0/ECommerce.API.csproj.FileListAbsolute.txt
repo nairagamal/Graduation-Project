@@ -126,3 +126,4 @@ D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.AP
 D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
 D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
 D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.sourcelink.json

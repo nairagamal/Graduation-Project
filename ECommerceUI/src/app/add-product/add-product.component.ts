@@ -30,6 +30,7 @@ export class AddProductComponent implements OnInit {
 
   categories: Category[] = [];
   offers: Offer[] = [];
+  selectedImage: string | ArrayBuffer | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -63,6 +64,17 @@ export class AddProductComponent implements OnInit {
   }
 
 
+  onImageSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedImage = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   onSubmit(): void {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -70,17 +82,27 @@ export class AddProductComponent implements OnInit {
       })
     };
 
-    this.http.post('https://localhost:7149/api/Shopping/InsertProduct', this.product, httpOptions)
+    // Assuming you want to send the image name along with product data
+    const productData = {
+      ...this.product,
+      imageName: this.product.imageName // Update imageName property with uploaded image name
+    };
+
+    this.http.post('https://localhost:7149/api/Shopping/InsertProduct', productData, httpOptions)
       .subscribe(
         (response) => {
           console.log('Product added successfully:', response);
-          this.resetForm();
+          alert('Product inserted successfully'); // Show success message
+          this.resetForm(); // Reset the form after successful submission
         },
         (error) => {
           console.error('Error adding product:', error);
+          alert('Error adding product. Please try again.'); // Show error message
         }
       );
   }
+
+
 
   resetForm(): void {
     this.product = {
@@ -101,5 +123,9 @@ export class AddProductComponent implements OnInit {
       quantity: 0,
       imageName: ''
     };
+  }
+
+  updateImageName(): void {
+    this.product.imageName = `${this.product.id}.jpg`;
   }
 }

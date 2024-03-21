@@ -10,6 +10,7 @@
     <textarea class="form-control" id="description" required [(ngModel)]="product.description" name="description"></textarea>
     <div *ngIf="!product.description" class="invalid-feedback">Description is required.</div>
   </div>
+
   <div class="form-group">
     <label for="category">Category</label>
     <select class="form-control" [(ngModel)]="product.productCategory.id" name="category">
@@ -18,18 +19,12 @@
     <div *ngIf="!product.productCategory.id" class="invalid-feedback">Category is required.</div>
   </div>
 
-
-
-
-
-
   <div class="form-group">
     <label for="offer">Offer</label>
     <select class="form-control" [(ngModel)]="product.offer.id" name="offer">
       <option *ngFor="let offer of offers" [value]="offer.id">{{ offer.title }}</option>
     </select>
   </div>
-
 
   <div class="form-group">
     <label for="price">Price</label>
@@ -43,5 +38,13 @@
     <div *ngIf="!product.quantity" class="invalid-feedback">Quantity is required.</div>
   </div>
 
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" class="form-control-file" id="image" (change)="onImageSelected($event)" accept="image/*">
+    <div *ngIf="!selectedImage" class="invalid-feedback">Image is required.</div>
+    <img *ngIf="selectedImage" [src]="selectedImage" class="img-fluid mt-2" alt="Selected Image">
+  </div>
+
+  <br>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
