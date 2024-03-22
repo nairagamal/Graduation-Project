@@ -5,7 +5,7 @@
         </div>
 
         <div class="overflow-hidden d-flex justify-content-center align-items-center">
-            <img src="../../assets/Images/{{product.productCategory.subCategory}}/{{product.id}}/1.jpg" alt=""
+            <img src="{{product.imageName}}" alt=""
                  class="card-img-top" OpenProductDetails [productId]="product.id">
         </div>
 
@@ -40,7 +40,7 @@
     <div class="card">
         <div class="row g-0">
             <div class="col-md-4 overflow-hidden d-flex justify-content-center align-items-center">
-                <img src="../../assets/Images/{{product.productCategory.subCategory}}/{{product.id}}/1.jpg"
+                <img src="{{product.imageName}}"
                      class="img-fluid rounded-start" alt="Product Image" OpenProductDetails [productId]="product.id">
             </div>
             <div class="col d-flex flex-column">
@@ -83,7 +83,7 @@
         <div class="row g-0">
 
             <div class="col-4 overflow-hidden d-flex justify-content-center align-items-center">
-              <img src="/assets/Images/{{product.productCategory.subCategory}}/{{product.id}}/1.jpg" alt="Product Image" class="card-img-top" OpenProductDetails [productId]="product.id">
+              <img src="{{product.imageName}}" alt="Product Image" class="card-img-top" OpenProductDetails [productId]="product.id">
 
             </div>
             <div class="col-8">
@@ -114,5 +114,7 @@
         <div class="card-body">
             <h5 class="card-title title"> {{product.title}} </h5>
         </div>
+
+
     </div>
 </div>

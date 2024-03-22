@@ -174,7 +174,15 @@ namespace ECommerce.API.Controllers
             // Modify this as per your implementation
             // Also, make sure your Product model matches the schema of your database
             var result = dataAccess.InsertProduct(product);
-            return Ok(result ? "Product inserted successfully" : "Failed to insert product");
+            if (result)
+            {
+                return Ok(new { success = true, message = "Product inserted successfully" });
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Failed to insert product" });
+            }
         }
+
     }
 }

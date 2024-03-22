@@ -39,12 +39,16 @@
   </div>
 
   <div class="form-group">
-    <label for="image">Image</label>
-    <input type="file" class="form-control-file" id="image" (change)="onImageSelected($event)" accept="image/*">
-    <div *ngIf="!selectedImage" class="invalid-feedback">Image is required.</div>
-    <img *ngIf="selectedImage" [src]="selectedImage" class="img-fluid mt-2" alt="Selected Image">
+    <label for="image">Image URL</label>
+    <input type="text" class="form-control" id="image" [(ngModel)]="product.imageName" name="image">
+    <div *ngIf="!product.imageName" class="invalid-feedback">Image URL is required.</div>
+    <img *ngIf="product.imageName" [src]="product.imageName" class="img-fluid mt-2" alt="Selected Image">
   </div>
 
   <br>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Add Product</button>
 </form>
+
+
+
+

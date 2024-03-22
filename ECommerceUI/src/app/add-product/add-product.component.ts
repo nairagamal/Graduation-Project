@@ -98,11 +98,11 @@ export class AddProductComponent implements OnInit {
         (error) => {
           console.error('Error adding product:', error);
           alert('Error adding product. Please try again.'); // Show error message
+          // Log the error object for further inspection
+          console.error('Error object:', error);
         }
       );
   }
-
-
 
   resetForm(): void {
     this.product = {
