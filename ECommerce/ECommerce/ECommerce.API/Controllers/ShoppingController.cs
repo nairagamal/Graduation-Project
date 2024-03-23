@@ -164,15 +164,10 @@ namespace ECommerce.API.Controllers
         }
 
 
-
-
-        // New endpoint to insert a product into the database
         [HttpPost("InsertProduct")]
         public IActionResult InsertProduct([FromBody] Product product)
         {
-            // Assuming your dataAccess interface has a method to insert a product
-            // Modify this as per your implementation
-            // Also, make sure your Product model matches the schema of your database
+            
             var result = dataAccess.InsertProduct(product);
             if (result)
             {

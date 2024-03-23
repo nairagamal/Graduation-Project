@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cart, Payment } from '../models/models';
 import { NavigationService } from '../services/navigation.service';
 import { UtilityService } from '../services/utility.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -63,19 +64,26 @@ export class CartComponent implements OnInit {
       });
   }
 
-  removeCartItem(cartItem: any): void {
-    // Find the index of the cartItem in usersCart.cartItems array
-    const index = this.usersCart.cartItems.findIndex(item => item === cartItem);
+  // Assuming these changes are made within the removeCartItem method
+removeCartItem(cartItem: any): void {
+  const index = this.usersCart.cartItems.findIndex(item => item === cartItem);
 
-    if (index !== -1) {
-      // Remove the cartItem from usersCart.cartItems
-      this.usersCart.cartItems.splice(index, 1);
+  if (index !== -1) {
+    this.usersCart.cartItems.splice(index, 1);
 
-      // Recalculate payment
-      this.utilityService.calculatePayment(
-        this.usersCart,
-        this.usersPaymentInfo
-      );
-    }
-  }
+    this.navigationService.removeCartItemFromBackend(cartItem).subscribe(
+      (response: any) => { // Specify the type of 'response'
+        console.log('Item removed successfully from backend.');
+      },
+      (error: any) => { // Specify the type of 'error'
+        console.error('Error removing item from backend:', error);
+      }
+    );
+
+    this.utilityService.calculatePayment(
+      this.usersCart,
+      this.usersPaymentInfo
+    );
+  } }
+
 }

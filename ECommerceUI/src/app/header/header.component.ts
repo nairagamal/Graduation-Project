@@ -50,18 +50,23 @@ export class HeaderComponent implements OnInit {
     });
 
     // Cart
+    this.updateCartItemsCount();
+
+    this.utilityService.changeCart.subscribe((res: any) => {
+      this.updateCartItemsCount();
+    });
+  }
+
+  updateCartItemsCount(): void {
     if (this.utilityService.isLoggedIn()) {
       this.navigationService
         .getActiveCartOfUser(this.utilityService.getUser().id)
         .subscribe((res: any) => {
           this.cartItems = res.cartItems.length;
         });
+    } else {
+      this.cartItems = 0;
     }
-
-    this.utilityService.changeCart.subscribe((res: any) => {
-      if (parseInt(res) === 0) this.cartItems = 0;
-      else this.cartItems += parseInt(res);
-    });
   }
 
   openModal(name: string) {

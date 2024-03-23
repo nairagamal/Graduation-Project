@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   Category,
   Order,
@@ -84,6 +85,12 @@ export class NavigationService {
   addToCart(userid: number, productid: number) {
     let url = this.baseurl + 'InsertCartItem/' + userid + '/' + productid;
     return this.http.post(url, null, { responseType: 'text' });
+  }
+
+  removeCartItemFromBackend(cartItem: any): Observable<any> {
+    // Make an HTTP request to the backend to remove the item from the cart
+    let url = this.baseurl + 'RemoveCartItem';
+    return this.http.post(url, cartItem);
   }
 
   getActiveCartOfUser(userid: number) {
