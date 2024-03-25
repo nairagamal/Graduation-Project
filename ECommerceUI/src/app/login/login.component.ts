@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private navigationService: NavigationService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,20 +36,39 @@ export class LoginComponent implements OnInit {
         ],
       ],
     });
+    this.resetForm();
   }
 
   login() {
-    this.navigationService
-      .loginUser(this.Email.value, this.PWD.value)
-      .subscribe((res: any) => {
-        if (res.toString() !== 'invalid') {
-          this.message = 'Logged In Successfully.';
-          this.utilityService.setUser(res.toString());
-          console.log(this.utilityService.getUser());
-        } else {
-          this.message = 'Invalid Credentials!';
+    if (this.loginForm.valid) {
+        const email = this.Email.value;
+        const password = this.PWD.value;
+
+        // Check if email and password match the admin credentials
+        if (email === 'admin@gmail.com' && password === '123456') {
+            // Redirect to admin component
+            this.router.navigate(['/admin']);
+            return; // Exit the function to prevent further execution
         }
-      });
+
+        // If not admin credentials, proceed with regular login
+        this.navigationService.loginUser(email, password)
+            .subscribe((res: any) => {
+                if (res.toString() !== 'invalid') {
+                    this.message = 'Logged In Successfully.';
+                    this.utilityService.setUser(res.toString());
+                    console.log(this.utilityService.getUser());
+                    this.router.navigate(['/home']); // Redirect to home page
+                } else {
+                    this.message = 'Invalid Credentials!';
+                }
+            });
+    }
+}
+
+
+  resetForm() {
+    this.loginForm.reset();
   }
 
   get Email(): FormControl {

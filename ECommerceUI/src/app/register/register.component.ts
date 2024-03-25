@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../models/models';
 import { NavigationService } from '../services/navigation.service';
 
@@ -15,12 +11,13 @@ import { NavigationService } from '../services/navigation.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  invaildRPWD: boolean = false;
+  invalidRPWD: boolean = false;
   message = '';
 
   constructor(
     private fb: FormBuilder,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private router: Router // Inject Router service
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +68,8 @@ export class RegisterComponent implements OnInit {
 
     this.navigationService.registerUser(user).subscribe((res: any) => {
       this.message = res.toString();
+      // Redirect to login page after successful registration
+      this.router.navigate(['/login']); // Navigate to the login route
     });
   }
 

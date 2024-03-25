@@ -106,7 +106,7 @@ namespace ECommerce.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetOffers")] // New endpoint to get offers
+        [HttpGet("GetOffers")] 
         public IActionResult GetOffers()
         {
             var result = dataAccess.GetOffers();
@@ -179,5 +179,6 @@ namespace ECommerce.API.Controllers
             }
         }
 
+    
     }
 }

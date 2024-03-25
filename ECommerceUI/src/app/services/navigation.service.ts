@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
+import { Product } from '../models/models';
 import { Observable } from 'rxjs';
 import {
   Category,
@@ -117,4 +118,50 @@ export class NavigationService {
   insertOrder(order: Order) {
     return this.http.post(this.baseurl + 'InsertOrder', order);
   }
+
+
+  getPendingOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.baseurl}/pending-orders`);
+  }
+
+  acceptOrder(orderId: number): Observable<any> {
+    return this.http.put(`${this.baseurl}/orders/${orderId}/accept`, {});
+  }
+
+  refuseOrder(orderId: number): Observable<any> {
+    return this.http.put(`${this.baseurl}/orders/${orderId}/refuse`, {});
+  }
+
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<any[]>(this.baseurl + 'GetProducts').pipe(
+      map((products) =>
+        products.map((product) => {
+          let mappedProduct: Product = {
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            productCategory: {
+              id: product.productCategory.id,
+              category: product.productCategory.category,
+              subCategory: product.productCategory.subCategory,
+            },
+            offer: {
+              id: product.offer.id,
+              title: product.offer.title,
+              discount: product.offer.discount,
+            },
+            price: product.price,
+            quantity: product.quantity,
+            imageName: product.imageName,
+          };
+          return mappedProduct;
+        })
+      )
+    );
+  }
+
+  insertProduct(product: Product): Observable<any> {
+    return this.http.post<any>(this.baseurl + 'InsertProduct', product);
+  }
+
 }

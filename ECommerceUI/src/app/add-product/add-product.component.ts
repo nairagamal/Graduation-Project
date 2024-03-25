@@ -31,8 +31,11 @@ export class AddProductComponent implements OnInit {
   categories: Category[] = [];
   offers: Offer[] = [];
   selectedImage: string | ArrayBuffer | null = null;
+  productToEdit: Product | null = null; // New property to hold the product being edited
 
   constructor(private http: HttpClient) { }
+
+  addedProducts: Product[] = [];
 
   ngOnInit(): void {
     this.fetchCategories();
@@ -63,7 +66,6 @@ export class AddProductComponent implements OnInit {
       );
   }
 
-
   onImageSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -93,7 +95,7 @@ export class AddProductComponent implements OnInit {
         (response) => {
           console.log('Product added successfully:', response);
           alert('Product inserted successfully'); // Show success message
-          this.resetForm(); // Reset the form after successful submission
+         // this.resetForm(); // Reset the form after successful submission
         },
         (error) => {
           console.error('Error adding product:', error);
@@ -102,30 +104,26 @@ export class AddProductComponent implements OnInit {
           console.error('Error object:', error);
         }
       );
+    this.addedProducts.push(this.product);
   }
 
-  resetForm(): void {
-    this.product = {
-      id: 0,
-      title: '',
-      description: '',
-      productCategory: {
-        id: 0,
-        category: '',
-        subCategory: ''
-      },
-      offer: {
-        id: 0,
-        title: '',
-        discount: 0
-      },
-      price: 0,
-      quantity: 0,
-      imageName: ''
-    };
+  deleteProduct(productId: number): void {
+    // Find the index of the product in addedProducts array
+    const index = this.addedProducts.findIndex(product => product.id === productId);
+
+    // If found, remove it from the array
+    if (index !== -1) {
+      this.addedProducts.splice(index, 1);
+    }
   }
 
-  updateImageName(): void {
-    this.product.imageName = `${this.product.id}.jpg`;
+  // Method to edit a product
+  editProduct(product: Product): void {
+    this.productToEdit = { ...product };
+  }
+
+  // Method to cancel editing
+  cancelEdit(): void {
+    this.productToEdit = null;
   }
 }

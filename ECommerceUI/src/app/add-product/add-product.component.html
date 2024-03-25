@@ -52,3 +52,34 @@
 
 
 
+<!-- Table to display added products -->
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Image</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let addedProduct of addedProducts">
+      <td>{{ addedProduct.title }}</td>
+      <td>{{ addedProduct.description }}</td>
+      <td>{{ addedProduct.price }}</td>
+      <td>{{ addedProduct.quantity }}</td>
+      <td>
+        <img [src]="addedProduct.imageName" alt="{{ addedProduct.title }}" class="img-thumbnail" style="max-height: 100px; max-width: 100px;">
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteProduct(addedProduct.id)">Delete</button>
+      </td>
+      <td>
+        <button class="btn btn-success btn-sm" [routerLink]="['/edit', addedProduct.id]">Edit</button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>

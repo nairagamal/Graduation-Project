@@ -9,7 +9,7 @@ import { SuggestedProduct } from '../models/models';
 export class HomeComponent implements OnInit {
   suggestedProducts: SuggestedProduct[] = [
     {
-      banerimage: 'Baner/Baner_Mobile.png',
+      banerimage: 'Baner/naira.jpg',
       category: {
         id: 0,
         category: 'electronics',
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
       },
     },
     {
-      banerimage: 'Baner/Baner_Laptop.png',
+      banerimage: 'Baner/Premium Vector _ Ramadan sale banner template background.jpeg',
       category: {
         id: 1,
         category: 'electronics',
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       },
     },
     {
-      banerimage: 'Baner/Baner_Chair.png',
+      banerimage: 'Baner/c6fc8237-dc0b-459d-84d5-d4937fd26c91.jpeg',
       category: {
         id: 1,
         category: 'furniture',

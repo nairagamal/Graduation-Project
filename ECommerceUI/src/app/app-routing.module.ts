@@ -7,6 +7,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
 import { SuggestedProductsComponent } from './suggested-products/suggested-products.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -15,6 +18,9 @@ const routes: Routes = [
   { path: 'product-details', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: OrderComponent },
+  { path: 'edit', component: EditProductComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminDashboardComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
   { path: 'suggest', component: SuggestedProductsComponent },

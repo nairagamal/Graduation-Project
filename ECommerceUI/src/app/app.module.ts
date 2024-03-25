@@ -24,6 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { AdminProductComponent } from './admin-product/admin-product.component';
 
 
 @NgModule({
@@ -44,6 +48,10 @@ import { AddProductComponent } from './add-product/add-product.component';
     RegisterComponent,
     LoginComponent,
     AddProductComponent,
+    EditProductComponent,
+    AdminDashboardComponent,
+    AdminOrderComponent,
+    AdminProductComponent,
   ],
   imports: [
     BrowserModule,
