@@ -2,6 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\ECommerce",
+    "\\ECommerceUI",
+    "\\ECommerceUI\\src",
+    "\\ECommerceUI\\src\\app",
+    "\\ECommerceUI\\src\\app\\home",
     "\\ECommerce\\ECommerce",
     "\\ECommerce\\ECommerce\\ECommerce.API",
     "\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess"
