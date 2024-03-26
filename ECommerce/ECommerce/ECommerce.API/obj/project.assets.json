@@ -1946,19 +1946,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mobi lap\\.nuget\\packages\\": {}
+    "C:\\Users\\fares\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Naira Gamal\\Final Project\\22-09-25 ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\ECommerce.API.csproj",
+      "projectUniqueName": "D:\\New folder\\ECommerce\\ECommerce\\ECommerce.API\\ECommerce.API.csproj",
       "projectName": "ECommerce.API",
-      "projectPath": "D:\\Naira Gamal\\Final Project\\22-09-25 ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\ECommerce.API.csproj",
-      "packagesPath": "C:\\Users\\mobi lap\\.nuget\\packages\\",
-      "outputPath": "D:\\Naira Gamal\\Final Project\\22-09-25 ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\obj\\",
+      "projectPath": "D:\\New folder\\ECommerce\\ECommerce\\ECommerce.API\\ECommerce.API.csproj",
+      "packagesPath": "C:\\Users\\fares\\.nuget\\packages\\",
+      "outputPath": "D:\\New folder\\ECommerce\\ECommerce\\ECommerce.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mobi lap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fares\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2020,6 +2020,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.26, 6.0.26]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.26, 6.0.26]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.26, 6.0.26]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.26, 6.0.26]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2028,7 +2046,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },

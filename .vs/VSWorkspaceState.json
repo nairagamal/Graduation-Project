@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ECommerce",
+    "\\ECommerce\\ECommerce",
+    "\\ECommerce\\ECommerce\\ECommerce.API",
+    "\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess"
+  ],
+  "SelectedNode": "\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess\\DataAccess.cs",
+  "PreviewInSolutionExplorer": false
+}
