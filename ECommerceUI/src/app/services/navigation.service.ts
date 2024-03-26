@@ -164,4 +164,16 @@ export class NavigationService {
     return this.http.post<any>(this.baseurl + 'InsertProduct', product);
   }
 
+
+  getProductById(productId: number): Observable<Product> {
+    const url = `${this.baseurl}GetProduct/${productId}`;
+    return this.http.get<Product>(url);
+  }
+
+
+  updateProduct(product: Product): Observable<any> {
+    return this.http.put<any>(`${this.baseurl}UpdateProduct/${product.id}`, product);
+  }
+
+
 }

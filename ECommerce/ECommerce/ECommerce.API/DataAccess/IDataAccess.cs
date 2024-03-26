@@ -30,5 +30,18 @@ namespace ECommerce.API.DataAccess
 
         // New method to get offers
         List<Offer> GetOffers();
+
+        List<Product> GetAllProducts();
+        bool DeleteProduct(int productId);
+        bool EditProduct(int productId, Product product);
+
+        List<User> GetAllUsers();
+        bool AddUser(User user);
+        bool EditUser(int userId, User user);
+        bool DeleteUser(int userId);
+
+        //Order GetOrder(int orderId);
+        //Payment GetPayment(int paymentId);
+
     }
 }

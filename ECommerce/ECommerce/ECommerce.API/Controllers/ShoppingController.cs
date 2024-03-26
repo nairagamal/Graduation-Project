@@ -55,6 +55,14 @@ namespace ECommerce.API.Controllers
             return Ok(message);
         }
 
+        [HttpGet("GetAllProducts")]
+        public IActionResult GetAllProducts()
+        {
+            var result = dataAccess.GetAllProducts(); // Assuming GetAllProducts() method fetches all products from the database
+            return Ok(result);
+        }
+
+
         [HttpPost("LoginUser")]
         public IActionResult LoginUser([FromBody] User user)
         {
@@ -179,6 +187,114 @@ namespace ECommerce.API.Controllers
             }
         }
 
-    
+
+        [HttpDelete("DeleteProduct/{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            try
+            {
+                // Call the data access layer to delete the product by its ID
+                bool result = dataAccess.DeleteProduct(id);
+
+                if (result)
+                {
+                    return Ok(new { success = true, message = "Product deleted successfully" });
+                }
+                else
+                {
+                    return NotFound(new { success = false, message = "Product not found or failed to delete" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+        [HttpPost("EditProduct/{productId}")]
+        public IActionResult EditProduct(int productId, [FromBody] Product product)
+        {
+            var result = dataAccess.EditProduct(productId, product);
+            if (result)
+            {
+                return Ok(new { success = true, message = "Product updated successfully" });
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Failed to update product" });
+            }
+        }
+
+
+
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            var result = dataAccess.GetAllUsers();
+            return Ok(result);
+        }
+
+        [HttpPost("InsertUser")]
+        public IActionResult AddUser([FromBody] User user)
+        {
+            // You may want to perform validation on the user object before inserting
+            var result = dataAccess.AddUser(user);
+            if (result)
+            {
+                return Ok("User inserted successfully");
+            }
+            else
+            {
+                return BadRequest("Failed to insert user");
+            }
+        }
+
+        [HttpPut("EditUser/{userId}")]
+        public IActionResult EditUser(int userId, [FromBody] User user)
+        {
+            // You may want to perform validation on the user object before editing
+            var result = dataAccess.EditUser(userId, user);
+            if (result)
+            {
+                return Ok("User updated successfully");
+            }
+            else
+            {
+                return BadRequest("Failed to update user");
+            }
+        }
+
+        [HttpDelete("DeleteUser/{userId}")]
+        public IActionResult DeleteUser(int userId)
+        {
+            var result = dataAccess.DeleteUser(userId);
+            if (result)
+            {
+                return Ok("User deleted successfully");
+            }
+            else
+            {
+                return NotFound("User not found or failed to delete");
+            }
+        }
+
+
+
+
+        //[HttpGet("GetOrder/{orderId}")]
+        //public IActionResult GetOrder(int orderId)
+        //{
+        //    var order = dataAccess.GetOrder(orderId);
+        //    if (order != null)
+        //    {
+        //        return Ok(order);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
     }
 }

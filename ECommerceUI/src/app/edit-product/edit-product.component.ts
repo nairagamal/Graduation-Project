@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavigationService } from '../services/navigation.service';
 import { Product } from '../models/models';
 
 @Component({
@@ -7,27 +8,29 @@ import { Product } from '../models/models';
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
-export class EditProductComponent {
-  @Input() product!: Product; // Input property to receive product data
-  @Output() saveChanges: EventEmitter<Product> = new EventEmitter<Product>(); // Output event to emit edited product data
-  @Output() cancelEdit: EventEmitter<void> = new EventEmitter<void>(); // Output event to cancel editing
+export class EditProductComponent implements OnInit {
+  @Input() productId!: number;
+  @Output() saveChanges: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() cancelEdit: EventEmitter<void> = new EventEmitter<void>();
 
-  editedProduct!: Product; // Property to store edited product data
+  editedProduct!: Product;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private navigationService: NavigationService) { }
 
-  ngOnChanges(): void {
-    // Initialize editedProduct with a copy of the received product data
-    this.editedProduct = { ...this.product };
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.productId = +params['productId'];
+      this.navigationService.getProductById(this.productId).subscribe(product => {
+        this.editedProduct = product;
+      });
+    });
   }
 
   onSaveChanges(): void {
-    // Emit the edited product data to the parent component
     this.saveChanges.emit(this.editedProduct);
   }
 
   onCancelEdit(): void {
-    // Emit cancel edit event
     this.cancelEdit.emit();
   }
 }

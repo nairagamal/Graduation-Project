@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product, Category, Offer } from '../models/models';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -31,15 +32,16 @@ export class AddProductComponent implements OnInit {
   categories: Category[] = [];
   offers: Offer[] = [];
   selectedImage: string | ArrayBuffer | null = null;
-  productToEdit: Product | null = null; // New property to hold the product being edited
+  productToEdit: Product | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private router: Router) { }
 
   addedProducts: Product[] = [];
 
   ngOnInit(): void {
     this.fetchCategories();
     this.fetchOffers();
+    this.fetchProducts();
   }
 
   fetchCategories(): void {
@@ -65,6 +67,26 @@ export class AddProductComponent implements OnInit {
         }
       );
   }
+
+  fetchProducts(): void {
+    // Fetch all products from the database
+    this.http.get<Product[]>('https://localhost:7149/api/Shopping/GetAllProducts')
+      .subscribe(
+        (response: Product[]) => {
+          this.addedProducts = response; // Assign fetched products to addedProducts array
+        },
+        (error) => {
+          console.error('Error fetching products:', error);
+        },
+        () => {
+
+
+        }
+      );
+  }
+
+ 
+
 
   onImageSelected(event: any): void {
     const file = event.target.files[0];
@@ -108,18 +130,29 @@ export class AddProductComponent implements OnInit {
   }
 
   deleteProduct(productId: number): void {
-    // Find the index of the product in addedProducts array
     const index = this.addedProducts.findIndex(product => product.id === productId);
 
-    // If found, remove it from the array
     if (index !== -1) {
-      this.addedProducts.splice(index, 1);
+
+      this.http.delete(`https://localhost:7149/api/Shopping/DeleteProduct/${productId}`)
+        .subscribe(
+          () => {
+            console.log('Product deleted successfully');
+            this.addedProducts.splice(index, 1);
+          },
+          (error) => {
+            console.error('Error deleting product:', error);
+            alert('Error deleting product. Please try again.');
+          }
+        );
     }
   }
 
+
   // Method to edit a product
-  editProduct(product: Product): void {
-    this.productToEdit = { ...product };
+  editProduct(productId: number): void {
+    // Redirect to the edit page with the selected product ID
+    this.router.navigate(['/edit', productId]);
   }
 
   // Method to cancel editing

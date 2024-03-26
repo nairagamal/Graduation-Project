@@ -3,6 +3,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, window } from 'rxjs';
 import { Cart, Payment, Product, User } from '../models/models';
 import { NavigationService } from './navigation.service';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +13,12 @@ import { NavigationService } from './navigation.service';
 export class UtilityService {
   changeCart = new Subject();
 
+  private readonly apiUrl = 'https://localhost:7149/api/';
   constructor(
     private navigationService: NavigationService,
-    private jwt: JwtHelperService
+    private jwt: JwtHelperService,
+    private http: HttpClient // Inject HttpClient
+
   ) {}
 
   applyDiscount(price: number, discount: number): number {
@@ -98,6 +104,23 @@ export class UtilityService {
   }
 
   orderTheCart() {
-    
+
+  }
+
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}Shopping/GetAllUsers`);
+  }
+
+  addUser(user: User): Observable<any> {
+    return this.http.post(`${this.apiUrl}Shopping/InsertUser`, user);
+  }
+
+  editUser(userId: number, user: User): Observable<any> {
+    return this.http.put(`${this.apiUrl}Shopping/EditUser/${userId}`, user);
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}Shopping/DeleteUser/${userId}`);
   }
 }

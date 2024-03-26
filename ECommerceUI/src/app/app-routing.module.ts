@@ -10,6 +10,7 @@ import { SuggestedProductsComponent } from './suggested-products/suggested-produ
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 
 const routes: Routes = [
@@ -18,9 +19,10 @@ const routes: Routes = [
   { path: 'product-details', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: OrderComponent },
-  { path: 'edit', component: EditProductComponent },
+  { path: 'edit/:productId', component: EditProductComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminDashboardComponent },
+  { path: 'app-user-management', component: UserManagementComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
   { path: 'suggest', component: SuggestedProductsComponent },

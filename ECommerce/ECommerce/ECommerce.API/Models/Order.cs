@@ -7,5 +7,6 @@
         public Cart Cart { get; set; } = new Cart();
         public Payment Payment { get; set; } = new Payment();
         public string CreatedAt { get; set; } = string.Empty;
+        //public string Status { get; set; } = "Pending";
     }
 }
