@@ -112,6 +112,10 @@ export class UtilityService {
     return this.http.get<User[]>(`${this.apiUrl}Shopping/GetAllUsers`);
   }
 
+  getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}Shopping/GetUser/${userId}`);
+  }
+
   addUser(user: User): Observable<any> {
     return this.http.post(`${this.apiUrl}Shopping/InsertUser`, user);
   }

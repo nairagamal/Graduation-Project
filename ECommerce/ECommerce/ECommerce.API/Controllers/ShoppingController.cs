@@ -281,6 +281,19 @@ namespace ECommerce.API.Controllers
         }
 
 
+        [HttpGet("GetUser/{userId}")]
+        public IActionResult GetUser(int userId)
+        {
+            var user = dataAccess.GetUser(userId);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
 
         //[HttpGet("GetOrder/{orderId}")]

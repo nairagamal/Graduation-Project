@@ -29,6 +29,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { AdminProductComponent } from './admin-product/admin-product.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
     AdminOrderComponent,
     AdminProductComponent,
     UserManagementComponent,
+    AdminReportsComponent,
   ],
   imports: [
     BrowserModule,

@@ -381,15 +381,10 @@ namespace ECommerce.API.DataAccess
         public User GetUser(int id)
         {
             var user = new User();
-            using (SqlConnection connection = new(dbconnection))
+            using (SqlConnection connection = new SqlConnection(dbconnection))
             {
-                SqlCommand command = new()
-                {
-                    Connection = connection
-                };
-
-                string query = "SELECT * FROM Users WHERE UserId=" + id + ";";
-                command.CommandText = query;
+                SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE UserId = @UserId", connection);
+                command.Parameters.AddWithValue("@UserId", id);
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

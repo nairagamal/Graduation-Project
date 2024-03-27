@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ECommerceUI';
   sideNavStatus = false;
+
+  constructor(private router: Router) {}
+
+  isInAdminDashboard(): boolean {
+    return this.router.url.startsWith('/admin');
+  }
 }
