@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Order } from '../models/models';
 import { NavigationService } from '../services/navigation.service';
+import { PendingOrdersService } from '../services/pending-orders.service';
 
 @Component({
   selector: 'app-admin-order',
@@ -10,32 +12,49 @@ import { NavigationService } from '../services/navigation.service';
 export class AdminOrderComponent implements OnInit {
   pendingOrders: Order[] = [];
 
-  constructor(private navigationService: NavigationService) { }
+  constructor(private ordersService: PendingOrdersService) { }
 
   ngOnInit(): void {
-    this.loadPendingOrders();
+    this.getPendingOrders();
   }
 
-  loadPendingOrders() {
-    // Assuming you have a service method to fetch pending orders from the backend
-    this.navigationService.getPendingOrders().subscribe((orders: Order[]) => {
-      this.pendingOrders = orders;
+  getPendingOrders() {
+
+    this.ordersService.getPendingOrders().subscribe((data: any) => {
+      this.pendingOrders = data;
     });
   }
 
   acceptOrder(orderId: number) {
-    // Call a service method to update order status as accepted
-    this.navigationService.acceptOrder(orderId).subscribe(() => {
-      // Reload pending orders after accepting
-      this.loadPendingOrders();
-    });
+    this.ordersService.acceptOrder(orderId).subscribe(
+      (response) => {
+        console.log('Order accepted successfully:', response);
+        this.updateOrderStatus(orderId, 'Approved');
+        this.getPendingOrders();
+      },
+      (error) => {
+        console.error('Error accepting order:', error);
+      }
+    );
   }
 
-  refuseOrder(orderId: number) {
-    // Call a service method to update order status as refused
-    this.navigationService.refuseOrder(orderId).subscribe(() => {
-      // Reload pending orders after refusing
-      this.loadPendingOrders();
-    });
+  rejectOrder(orderId: number) {
+    this.ordersService.rejectOrder(orderId).subscribe(
+      (response) => {
+        console.log('Order rejected successfully:', response);
+        this.updateOrderStatus(orderId, 'Rejected');
+       this.getPendingOrders();
+      },
+      (error) => {
+        console.error('Error rejecting order:', error);
+      }
+    );
+  }
+
+  private updateOrderStatus(orderId: number, status: string) {
+    const orderIndex = this.pendingOrders.findIndex(order => order.id === orderId);
+    if (orderIndex !== -1) {
+      this.pendingOrders[orderIndex].Status = status;
+    }
   }
 }

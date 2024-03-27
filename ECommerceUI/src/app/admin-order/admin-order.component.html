@@ -1,37 +1,26 @@
-<div class="my-container mx-auto">
+<div class="container">
   <h2>Pending Orders</h2>
   <div *ngIf="pendingOrders.length === 0">
-    <p>No pending orders.</p>
+    <p>No pending orders found.</p>
   </div>
-  <div *ngFor="let order of pendingOrders" class="m-3 p-4 border border-dark my-rounded-corner">
-    <h4 class="w-50 border border-secondary text-center py-2 my-rounded-corner">Order ID: {{ order.id }}</h4>
-    <table class="table w-75 mx-auto table-bordered table-hover my-shadow">
-      <tbody>
-        <tr>
-          <td>Total Items</td>
-          <td class="fs-5 fw-bold">{{ order.cart.cartItems.length }}</td>
-        </tr>
-        <tr>
-          <td>Total Price</td>
-          <td class="fs-5 fw-bold text-danger">{{ order.payment.totalAmount }}</td>
-        </tr>
-        <tr>
-          <td>Shipping Charges</td>
-          <td class="fs-5 fw-bold text-danger">{{ order.payment.shipingCharges }}</td>
-        </tr>
-        <tr>
-          <td>Discount</td>
-          <td class="fs-5 fw-bold text-success">{{ order.payment.amountReduced }}</td>
-        </tr>
-        <tr>
-          <td>Amount Paid</td>
-          <td class="fs-5 fw-bold text-success">{{ order.payment.amountPaid }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-grid gap-2 mt-4">
-      <button class="btn btn-success" (click)="acceptOrder(order.id)">Accept</button>
-      <button class="btn btn-danger" (click)="refuseOrder(order.id)">Refuse</button>
+  <div *ngFor="let order of pendingOrders" class="order-container">
+    <div class="order-details">
+      <h3>Order ID: {{ order.id }}</h3>
+      <p>User: {{ order.user.firstName }} {{ order.user.lastName }}</p>
+      <p>Ordered On: {{ order.createdAt }}</p>
+      <h4>Products:</h4>
+      <ul>
+        <li *ngFor="let item of order.cart.cartItems" class="product-item">
+          <p>Product: {{ item.product.title }}</p>
+          <p>Price: {{ item.product.price | currency:'USD':'symbol' }}</p>
+          <p>Category: {{ item.product.productCategory.category }}</p>
+          <p>Description: {{ item.product.description }}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="action-buttons">
+      <button class="action-button accept" (click)="acceptOrder(order.id)">Accept</button>
+      <button class="action-button reject" (click)="rejectOrder(order.id)">Reject</button>
     </div>
   </div>
 </div>

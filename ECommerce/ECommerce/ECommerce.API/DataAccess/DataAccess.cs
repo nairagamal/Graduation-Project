@@ -1,5 +1,6 @@
 ﻿using ECommerce.API.Models;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
@@ -190,26 +191,34 @@ namespace ECommerce.API.DataAccess
         public Product GetProduct(int id)
         {
             var product = new Product();
-            using (SqlConnection connection = new(dbconnection))
+            using (SqlConnection connection = new SqlConnection(dbconnection))
             {
-                SqlCommand command = new()
+                SqlCommand command = new SqlCommand()
                 {
                     Connection = connection
                 };
 
-                string query = "SELECT * FROM Products WHERE ProductId=" + id + ";";
+                string query = "SELECT * FROM Products WHERE ProductId=@Id;";
                 command.CommandText = query;
+                command.Parameters.AddWithValue("@Id", id);
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     product.Id = (int)reader["ProductId"];
-                    product.Title = (string)reader["Title"];
-                    product.Description = (string)reader["Description"];
+                    product.Title = reader["Title"] != DBNull.Value ? (string)reader["Title"] : null;
+                    product.Description = reader["Description"] != DBNull.Value ? (string)reader["Description"] : null;
                     product.Price = (double)reader["Price"];
                     product.Quantity = (int)reader["Quantity"];
-                    product.ImageName = (string)reader["ImageName"];
+                    product.Color = reader["Color"] != DBNull.Value ? (string)reader["Color"] : null;
+                    product.ModelName = reader["ModelName"] != DBNull.Value ? (string)reader["ModelName"] : null;
+                    product.BrandName = reader["BrandName"] != DBNull.Value ? (string)reader["BrandName"] : null;
+                    product.ImageUrl1 = reader["ImageUrl1"] != DBNull.Value ? (string)reader["ImageUrl1"] : null;
+                    product.ImageUrl2 = reader["ImageUrl2"] != DBNull.Value ? (string)reader["ImageUrl2"] : null;
+                    product.ImageUrl3 = reader["ImageUrl3"] != DBNull.Value ? (string)reader["ImageUrl3"] : null;
+                    product.ImageUrl4 = reader["ImageUrl4"] != DBNull.Value ? (string)reader["ImageUrl4"] : null;
+                    product.ImageUrl5 = reader["ImageUrl5"] != DBNull.Value ? (string)reader["ImageUrl5"] : null;
 
                     var categoryid = (int)reader["CategoryId"];
                     product.ProductCategory = GetProductCategory(categoryid);
@@ -315,17 +324,17 @@ namespace ECommerce.API.DataAccess
         public List<Product> GetProducts(string category, string subcategory, int count)
         {
             var products = new List<Product>();
-            using (SqlConnection connection = new(dbconnection))
+            using (SqlConnection connection = new SqlConnection(dbconnection))
             {
-                SqlCommand command = new()
+                SqlCommand command = new SqlCommand()
                 {
                     Connection = connection
                 };
 
-                string query = "SELECT TOP " + count + " * FROM Products WHERE CategoryId=(SELECT CategoryId FROM ProductCategories WHERE Category=@c AND SubCategory=@s) ORDER BY newid();";
+                string query = "SELECT TOP " + count + " * FROM Products WHERE CategoryId=(SELECT CategoryId FROM ProductCategories WHERE Category=@c AND SubCategory=@s) ORDER BY NEWID();";
                 command.CommandText = query;
-                command.Parameters.Add("@c", System.Data.SqlDbType.NVarChar).Value = category;
-                command.Parameters.Add("@s", System.Data.SqlDbType.NVarChar).Value = subcategory;
+                command.Parameters.AddWithValue("@c", category);
+                command.Parameters.AddWithValue("@s", subcategory);
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -338,7 +347,14 @@ namespace ECommerce.API.DataAccess
                         Description = (string)reader["Description"],
                         Price = (double)reader["Price"],
                         Quantity = (int)reader["Quantity"],
-                        ImageName = (string)reader["ImageName"]
+                        Color = (string)reader["Color"],
+                        ModelName = (string)reader["ModelName"],
+                        BrandName = (string)reader["BrandName"],
+                        ImageUrl1 = (string)reader["ImageUrl1"],
+                        ImageUrl2 = reader["ImageUrl2"] == DBNull.Value ? null : (string)reader["ImageUrl2"],
+                        ImageUrl3 = reader["ImageUrl3"] == DBNull.Value ? null : (string)reader["ImageUrl3"],
+                        ImageUrl4 = reader["ImageUrl4"] == DBNull.Value ? null : (string)reader["ImageUrl4"],
+                        ImageUrl5 = reader["ImageUrl5"] == DBNull.Value ? null : (string)reader["ImageUrl5"]
                     };
 
                     var categoryid = (int)reader["CategoryId"];
@@ -352,7 +368,6 @@ namespace ECommerce.API.DataAccess
             }
             return products;
         }
-
 
         public List<Offer> GetOffers()
         {
@@ -381,10 +396,15 @@ namespace ECommerce.API.DataAccess
         public User GetUser(int id)
         {
             var user = new User();
-            using (SqlConnection connection = new SqlConnection(dbconnection))
+            using (SqlConnection connection = new(dbconnection))
             {
-                SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE UserId = @UserId", connection);
-                command.Parameters.AddWithValue("@UserId", id);
+                SqlCommand command = new()
+                {
+                    Connection = connection
+                };
+
+                string query = "SELECT * FROM Users WHERE UserId=" + id + ";";
+                command.CommandText = query;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -440,7 +460,6 @@ namespace ECommerce.API.DataAccess
         {
             int value = 0;
 
-            // Get the current date and time as a string
             string dateformat = DateTime.Now.ToString();
 
             using (SqlConnection connection = new(dbconnection))
@@ -481,11 +500,146 @@ namespace ECommerce.API.DataAccess
         }
 
 
+        public Order GetOrder(int orderId)
+        {
+            Order order = null;
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Orders WHERE Id = @OrderId", connection);
+                command.Parameters.AddWithValue("@OrderId", orderId);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    order = new Order
+                    {
+                        Id = (int)reader["Id"],
+                        User = GetUser((int)reader["UserId"]),
+                        Cart = GetCart((int)reader["CartId"]),
+                        Payment = GetPayment((int)reader["PaymentId"]),
+                        CreatedAt = (string)reader["CreatedAt"],
+                        Status = (string)reader["Status"]
+                    };
+                }
+            }
+            return order;
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            List<Order> orders = new List<Order>();
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Orders", connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Order order = new Order
+                    {
+                        Id = (int)reader["Id"],
+                        User = GetUser((int)reader["UserId"]),
+                        Cart = GetCart((int)reader["CartId"]),
+                        Payment = GetPayment((int)reader["PaymentId"]),
+                        CreatedAt = (string)reader["CreatedAt"],
+                        Status = (string)reader["Status"]
+                    };
+                    orders.Add(order);
+                }
+            }
+            return orders;
+        }
+
+        public List<Order> GetPendingOrders()
+        {
+            List<Order> pendingOrders = new List<Order>();
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Orders WHERE Status = 'Pending'", connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Order order = new Order
+                    {
+                        Id = (int)reader["Id"],
+                        User = GetUser((int)reader["UserId"]),
+                        Cart = GetCart((int)reader["CartId"]),
+                        Payment = GetPayment((int)reader["PaymentId"]),
+                        CreatedAt = (string)reader["CreatedAt"],
+                        Status = (string)reader["Status"]
+                    };
+                    pendingOrders.Add(order);
+                }
+            }
+            return pendingOrders;
+        }
+
+        public void AcceptOrder(int orderId)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("UPDATE Orders SET Status = 'Approved' WHERE Id = @OrderId", connection);
+                command.Parameters.AddWithValue("@OrderId", orderId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void RejectOrder(int orderId)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("UPDATE Orders SET Status = 'Rejected' WHERE Id = @OrderId", connection);
+                command.Parameters.AddWithValue("@OrderId", orderId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
 
 
 
+        public Payment GetPayment(int paymentId)
+        {
+            Payment payment = null;
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Payments WHERE Id = @PaymentId", connection);
+                command.Parameters.AddWithValue("@PaymentId", paymentId);
 
-        //---------------------
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    payment = new Payment
+                    {
+                        Id = (int)reader["Id"],
+                        PaymentMethod = new PaymentMethod
+                        {
+
+                        },
+                        User = new User
+                        {
+
+                        },
+                        TotalAmount = (int)reader["TotalAmount"],
+                        ShippingCharges = (int)reader["ShippingCharges"],
+                        AmountReduced = (int)reader["AmountReduced"],
+                        AmountPaid = (int)reader["AmountPaid"],
+                        CreatedAt = (string)reader["CreatedAt"]
+                    };
+                }
+            }
+            return payment;
+        }
+
+
+
         public int InsertPayment(Payment payment)
         {
             int value = 0;
@@ -503,7 +657,7 @@ namespace ECommerce.API.DataAccess
                 command.Parameters.Add("@pmid", System.Data.SqlDbType.Int).Value = payment.PaymentMethod.Id;
                 command.Parameters.Add("@uid", System.Data.SqlDbType.Int).Value = payment.User.Id;
                 command.Parameters.Add("@ta", System.Data.SqlDbType.NVarChar).Value = payment.TotalAmount;
-                command.Parameters.Add("@sc", System.Data.SqlDbType.NVarChar).Value = payment.ShipingCharges;
+                command.Parameters.Add("@sc", System.Data.SqlDbType.NVarChar).Value = payment.ShippingCharges;
                 command.Parameters.Add("@ar", System.Data.SqlDbType.NVarChar).Value = payment.AmountReduced;
                 command.Parameters.Add("@ap", System.Data.SqlDbType.NVarChar).Value = payment.AmountPaid;
                 command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = payment.CreatedAt;
@@ -582,21 +736,25 @@ namespace ECommerce.API.DataAccess
 
         public bool EditProduct(int productId, Product product)
         {
-            // Implement the logic to edit the product with the given productId
-            // You can use ADO.NET or any other data access mechanism to perform the update operation
-
             using (SqlConnection connection = new SqlConnection(dbconnection))
             {
                 string query = @"
-            UPDATE Products 
-            SET Title = @Title, 
+                UPDATE Products 
+                SET Title = @Title, 
                 Description = @Description, 
                 CategoryId = @CategoryId, 
                 OfferId = @OfferId, 
                 Price = @Price, 
                 Quantity = @Quantity, 
-                ImageName = @ImageName 
-            WHERE ProductId = @ProductId;";
+                Color = @Color, 
+                ModelName = @ModelName, 
+                BrandName = @BrandName, 
+                ImageUrl1 = @ImageUrl1, 
+                ImageUrl2 = @ImageUrl2, 
+                ImageUrl3 = @ImageUrl3, 
+                ImageUrl4 = @ImageUrl4, 
+                ImageUrl5 = @ImageUrl5 
+                WHERE ProductId = @ProductId;";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Title", product.Title);
@@ -605,7 +763,14 @@ namespace ECommerce.API.DataAccess
                 command.Parameters.AddWithValue("@OfferId", product.Offer.Id);
                 command.Parameters.AddWithValue("@Price", product.Price);
                 command.Parameters.AddWithValue("@Quantity", product.Quantity);
-                command.Parameters.AddWithValue("@ImageName", product.ImageName);
+                command.Parameters.AddWithValue("@Color", product.Color);
+                command.Parameters.AddWithValue("@ModelName", product.ModelName);
+                command.Parameters.AddWithValue("@BrandName", product.BrandName);
+                command.Parameters.AddWithValue("@ImageUrl1", product.ImageUrl1);
+                command.Parameters.AddWithValue("@ImageUrl2", (object)product.ImageUrl2 ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ImageUrl3", (object)product.ImageUrl3 ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ImageUrl4", (object)product.ImageUrl4 ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ImageUrl5", (object)product.ImageUrl5 ?? DBNull.Value);
                 command.Parameters.AddWithValue("@ProductId", productId);
 
                 connection.Open();
@@ -615,50 +780,28 @@ namespace ECommerce.API.DataAccess
             }
         }
 
-
-        //public Order GetOrder(int orderId)
-        //{
-        //    Order order = null;
-        //    using (SqlConnection connection = new SqlConnection(dbconnection))
-        //    {
-        //        SqlCommand command = new SqlCommand("SELECT * FROM Orders WHERE Id = @OrderId", connection);
-        //        command.Parameters.AddWithValue("@OrderId", orderId);
-
-        //        connection.Open();
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        if (reader.Read())
-        //        {
-        //            order = new Order
-        //            {
-        //                Id = (int)reader["Id"],
-        //                User = GetUser((int)reader["UserId"]),
-        //                Cart = GetCart((int)reader["CartId"]),
-        //                Payment = GetPayment((int)reader["PaymentId"]),
-        //                CreatedAt = (string)reader["CreatedAt"],
-        //                Status = (string)reader["Status"]
-        //            };
-        //        }
-        //    }
-        //    return order;
-        //}
-
-
-
         public bool InsertProduct(Product product)
         {
             using (SqlConnection connection = new SqlConnection(dbconnection))
             {
-                string query = @"INSERT INTO Products (Title, Description, CategoryId, OfferId, Price, Quantity, ImageName) 
-                                 VALUES (@Title, @Description, @CategoryId, @OfferId, @Price, @Quantity, @ImageName);";
+                string query = @"INSERT INTO Products (Title, Description, CategoryId, OfferId, Price, Quantity, Color, ModelName, BrandName, ImageUrl1, ImageUrl2, ImageUrl3, ImageUrl4, ImageUrl5) 
+                         VALUES (@Title, @Description, @CategoryId, @OfferId, @Price, @Quantity, @Color, @ModelName, @BrandName, @ImageUrl1, @ImageUrl2, @ImageUrl3, @ImageUrl4, @ImageUrl5);";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Title", product.Title);
                 command.Parameters.AddWithValue("@Description", product.Description);
-                command.Parameters.AddWithValue("@CategoryId", product.ProductCategory.Id); // Assuming ProductCategory has an Id property
-                command.Parameters.AddWithValue("@OfferId", product.Offer.Id); // Assuming Offer has an Id property
+                command.Parameters.AddWithValue("@CategoryId", product.ProductCategory.Id);
+                command.Parameters.AddWithValue("@OfferId", product.Offer.Id);
                 command.Parameters.AddWithValue("@Price", product.Price);
                 command.Parameters.AddWithValue("@Quantity", product.Quantity);
-                command.Parameters.AddWithValue("@ImageName", product.ImageName);
+                command.Parameters.AddWithValue("@Color", product.Color);
+                command.Parameters.AddWithValue("@ModelName", product.ModelName);
+                command.Parameters.AddWithValue("@BrandName", product.BrandName);
+                command.Parameters.AddWithValue("@ImageUrl1", product.ImageUrl1);
+                command.Parameters.AddWithValue("@ImageUrl2", (object)product.ImageUrl2 ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ImageUrl3", (object)product.ImageUrl3 ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ImageUrl4", (object)product.ImageUrl4 ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ImageUrl5", (object)product.ImageUrl5 ?? DBNull.Value);
 
                 connection.Open();
                 int rowsAffected = command.ExecuteNonQuery();
@@ -666,7 +809,6 @@ namespace ECommerce.API.DataAccess
                 return rowsAffected > 0;
             }
         }
-
 
         public List<Product> GetAllProducts()
         {
@@ -682,11 +824,18 @@ namespace ECommerce.API.DataAccess
                     var product = new Product
                     {
                         Id = (int)reader["ProductId"],
-                        Title = (string)reader["Title"],
-                        Description = (string)reader["Description"],
+                        Title = reader["Title"] != DBNull.Value ? (string)reader["Title"] : null,
+                        Description = reader["Description"] != DBNull.Value ? (string)reader["Description"] : null,
                         Price = (double)reader["Price"],
                         Quantity = (int)reader["Quantity"],
-                        ImageName = (string)reader["ImageName"]
+                        Color = reader["Color"] != DBNull.Value ? (string)reader["Color"] : null,
+                        ModelName = reader["ModelName"] != DBNull.Value ? (string)reader["ModelName"] : null,
+                        BrandName = reader["BrandName"] != DBNull.Value ? (string)reader["BrandName"] : null,
+                        ImageUrl1 = reader["ImageUrl1"] != DBNull.Value ? (string)reader["ImageUrl1"] : null,
+                        ImageUrl2 = reader["ImageUrl2"] != DBNull.Value ? (string)reader["ImageUrl2"] : null,
+                        ImageUrl3 = reader["ImageUrl3"] != DBNull.Value ? (string)reader["ImageUrl3"] : null,
+                        ImageUrl4 = reader["ImageUrl4"] != DBNull.Value ? (string)reader["ImageUrl4"] : null,
+                        ImageUrl5 = reader["ImageUrl5"] != DBNull.Value ? (string)reader["ImageUrl5"] : null
                     };
 
                     var categoryId = (int)reader["CategoryId"];
@@ -701,7 +850,6 @@ namespace ECommerce.API.DataAccess
             return products;
         }
 
-
         public bool DeleteProduct(int productId)
         {
             using (SqlConnection connection = new SqlConnection(dbconnection))
@@ -715,7 +863,6 @@ namespace ECommerce.API.DataAccess
                 return rowsAffected > 0;
             }
         }
-
 
         public List<User> GetAllUsers()
         {
@@ -813,8 +960,6 @@ namespace ECommerce.API.DataAccess
         }
 
 
-
-
         public string IsUserPresent(string email, string password)
         {
             User user = new();
@@ -880,5 +1025,81 @@ namespace ECommerce.API.DataAccess
             }
             return "";
         }
+
+
+
+        public List<Order> GetOrdersThisWeek()
+        {
+            var ordersThisWeek = new List<Order>();
+
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = connection.CreateCommand();
+                connection.Open();
+
+                DateTime currentDate = DateTime.Now.Date;
+                DateTime firstDayOfWeek = currentDate.AddDays(-(int)currentDate.DayOfWeek);
+                DateTime lastDayOfWeek = firstDayOfWeek.AddDays(6);
+
+                string query = "SELECT * FROM Orders WHERE CAST(CreatedAt AS DATE) BETWEEN @FirstDayOfWeek AND @LastDayOfWeek";
+
+                command.Parameters.AddWithValue("@FirstDayOfWeek", firstDayOfWeek);
+                command.Parameters.AddWithValue("@LastDayOfWeek", lastDayOfWeek);
+
+                command.CommandText = query;
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Order order = new Order
+                    {
+                        Id = (int)reader["Id"],
+                    };
+
+                    ordersThisWeek.Add(order);
+                }
+            }
+
+            return ordersThisWeek;
+        }
+
+        public List<Order> GetOrdersLastMonth()
+        {
+            var ordersLastMonth = new List<Order>();
+
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = connection.CreateCommand();
+                connection.Open();
+
+                DateTime currentDate = DateTime.Now.Date;
+                DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                string query = "SELECT * FROM Orders WHERE CAST(CreatedAt AS DATE) BETWEEN @FirstDayOfMonth AND @LastDayOfMonth";
+
+                command.Parameters.AddWithValue("@FirstDayOfMonth", firstDayOfMonth);
+                command.Parameters.AddWithValue("@LastDayOfMonth", lastDayOfMonth);
+
+                command.CommandText = query;
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Order order = new Order
+                    {
+                        Id = (int)reader["Id"],
+                    };
+
+                    ordersLastMonth.Add(order);
+                }
+            }
+
+            return ordersLastMonth;
+        }
     }
 }
+
+

@@ -153,6 +153,7 @@ export class OrderComponent implements OnInit {
           cart: this.usersCart,
           payment: payment,
           createdAt: '',
+          Status: 'pending'
         };
         this.navigationService.insertOrder(order).subscribe((orderResponse) => {
           this.utilityService.changeCart.next(0);

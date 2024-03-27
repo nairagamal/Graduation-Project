@@ -114,7 +114,7 @@ namespace ECommerce.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetOffers")] 
+        [HttpGet("GetOffers")]
         public IActionResult GetOffers()
         {
             var result = dataAccess.GetOffers();
@@ -129,53 +129,12 @@ namespace ECommerce.API.Controllers
             return Ok(id.ToString());
         }
 
-        [HttpPost("InsertOrder")]
-        public IActionResult InsertOrder(Order order)
-        {
-            order.CreatedAt = DateTime.Now.ToString();
-            var id = dataAccess.InsertOrder(order);
-            return Ok(id.ToString());
-        }
-
-        [HttpPost("UploadImage")]
-        public IActionResult UploadImage(IFormFile file)
-        {
-            try
-            {
-                // Check if the file is null
-                if (file == null || file.Length == 0)
-                    return BadRequest("No file uploaded.");
-
-                // Get the file extension
-                var extension = Path.GetExtension(file.FileName);
-
-                // Generate a unique filename
-                var uniqueFileName = Guid.NewGuid().ToString() + extension;
-
-                // Get the path where the file will be saved
-                var imagePath = Path.Combine("wwwroot", "images", "products", uniqueFileName);
-
-                // Save the file to the server
-                using (var stream = new FileStream(imagePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                // Return the path to the saved image
-                var imageUrl = $"~/images/products/{uniqueFileName}";
-                return Ok(new { imageUrl });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
-            }
-        }
 
 
         [HttpPost("InsertProduct")]
         public IActionResult InsertProduct([FromBody] Product product)
         {
-            
+
             var result = dataAccess.InsertProduct(product);
             if (result)
             {
@@ -254,7 +213,6 @@ namespace ECommerce.API.Controllers
         [HttpPut("EditUser/{userId}")]
         public IActionResult EditUser(int userId, [FromBody] User user)
         {
-            // You may want to perform validation on the user object before editing
             var result = dataAccess.EditUser(userId, user);
             if (result)
             {
@@ -281,13 +239,50 @@ namespace ECommerce.API.Controllers
         }
 
 
-        [HttpGet("GetUser/{userId}")]
-        public IActionResult GetUser(int userId)
+        [HttpPost("InsertOrder")]
+        public IActionResult InsertOrder(Order order)
         {
-            var user = dataAccess.GetUser(userId);
-            if (user != null)
+            order.CreatedAt = DateTime.Now.ToString();
+            var id = dataAccess.InsertOrder(order);
+            return Ok(id.ToString());
+        }
+
+        [HttpPost("UploadImage")]
+        public IActionResult UploadImage(IFormFile file)
+        {
+            try
             {
-                return Ok(user);
+                // Check if the file is null
+                if (file == null || file.Length == 0)
+                    return BadRequest("No file uploaded.");
+
+                var extension = Path.GetExtension(file.FileName);
+
+                var uniqueFileName = Guid.NewGuid().ToString() + extension;
+
+                var imagePath = Path.Combine("wwwroot", "images", "products", uniqueFileName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                var imageUrl = $"~/images/products/{uniqueFileName}";
+                return Ok(new { imageUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("GetOrder/{orderId}")]
+        public IActionResult GetOrder(int orderId)
+        {
+            var order = dataAccess.GetOrder(orderId);
+            if (order != null)
+            {
+                return Ok(order);
             }
             else
             {
@@ -295,19 +290,82 @@ namespace ECommerce.API.Controllers
             }
         }
 
+        [HttpGet("GetAllOrders")]
+        public IActionResult GetAllOrders()
+        {
+            var orders = dataAccess.GetAllOrders();
+            return Ok(orders);
+        }
 
-        //[HttpGet("GetOrder/{orderId}")]
-        //public IActionResult GetOrder(int orderId)
-        //{
-        //    var order = dataAccess.GetOrder(orderId);
-        //    if (order != null)
-        //    {
-        //        return Ok(order);
-        //    }
-        //    else
-        //    {
-        //        return NotFound();
-        //    }
-        //}
+        [HttpGet("GetPendingOrders")]
+        public IActionResult GetPendingOrders()
+        {
+            var pendingOrders = dataAccess.GetPendingOrders();
+            return Ok(pendingOrders);
+        }
+
+        [HttpPut("{orderId}/accept")]
+        public IActionResult AcceptOrder(int orderId)
+        {
+            try
+            {
+                dataAccess.AcceptOrder(orderId);
+                return Ok("Order Approved successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPut("{orderId}/reject")]
+        public IActionResult RejectOrder(int orderId)
+        {
+            try
+            {
+                dataAccess.RejectOrder(orderId);
+                return Ok("Order rejected successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("orders/thisweek")]
+        public IActionResult GetOrdersThisWeek()
+        {
+            try
+            {
+                var orders = dataAccess.GetOrdersThisWeek();
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("orders/lastmonth")]
+        public IActionResult GetOrdersLastMonth()
+        {
+            try
+            {
+                var orders = dataAccess.GetOrdersLastMonth();
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
+
+
+
 }
+
+
+
+

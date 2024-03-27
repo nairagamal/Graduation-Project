@@ -7,9 +7,7 @@ namespace ECommerce.API.DataAccess
     {
         List<ProductCategory> GetProductCategories();
         ProductCategory GetProductCategory(int id);
-        
         Offer GetOffer(int id);
-
         List<Product> GetProducts(string category, string subcategory, int count);
         Product GetProduct(int id);
         bool InsertUser(User user);
@@ -24,24 +22,22 @@ namespace ECommerce.API.DataAccess
         List<PaymentMethod> GetPaymentMethods();
         int InsertPayment(Payment payment);
         int InsertOrder(Order order);
-
-        // New method to insert a product
         bool InsertProduct(Product product);
-
-        // New method to get offers
         List<Offer> GetOffers();
-
         List<Product> GetAllProducts();
         bool DeleteProduct(int productId);
         bool EditProduct(int productId, Product product);
-
         List<User> GetAllUsers();
         bool AddUser(User user);
         bool EditUser(int userId, User user);
         bool DeleteUser(int userId);
-
-        //Order GetOrder(int orderId);
-        //Payment GetPayment(int paymentId);
-
+        Order GetOrder(int orderId);
+        Payment GetPayment(int paymentId);
+        List<Order> GetAllOrders();
+        List<Order> GetPendingOrders();
+        void AcceptOrder(int orderId);
+        void RejectOrder(int orderId);
+        List<Order> GetOrdersThisWeek();
+        List<Order> GetOrdersLastMonth();
     }
 }

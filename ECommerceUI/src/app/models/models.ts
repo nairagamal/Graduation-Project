@@ -99,6 +99,7 @@ export interface Order {
   cart: Cart;
   payment: Payment;
   createdAt: string;
+  Status: string;
 }
 
 // #endregion
