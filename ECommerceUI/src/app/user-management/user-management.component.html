@@ -3,27 +3,29 @@
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
+      <!-- <th>ID</th> -->
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
       <th>Address</th>
       <th>Mobile</th>
-      <th>Created At</th>
-      <th>Modified At</th>
+      <th>Password</th>
+      <!-- <th>Created At</th>
+      <th>Modified At</th> -->
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
+      <!-- <td>{{ user.id }}</td> -->
       <td>{{ user.firstName }}</td>
       <td>{{ user.lastName }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.address }}</td>
       <td>{{ user.mobile }}</td>
-      <td>{{ user.createdAt }}</td>
-      <td>{{ user.modifiedAt }}</td>
+      <td>{{ user.password }}</td>
+      <!-- <td>{{ user.createdAt }}</td>
+      <td>{{ user.modifiedAt }}</td> -->
       <td>
         <button (click)="editUser(user)" >Edit</button>
         <button (click)="deleteUser(user.id)">Delete</button>
@@ -77,3 +79,51 @@
     </form>
   </td>
 </tr>
+
+
+
+<!-- Add User Button -->
+<button class="btn btn-primary mb-3" (click)="toggleAddUserForm()">Add User</button>
+
+<!-- Add User Form (Initially hidden) -->
+<div *ngIf="showAddUserForm">
+  <h3>Add User</h3>
+  <form (ngSubmit)="addUser()" #addUserForm="ngForm">
+    <!-- Input fields for user attributes -->
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="newUser.firstName" required>
+    </div>
+    <!-- Repeat similar input fields for other user attributes -->
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newUser.lastName" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="newUser.email" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" class="form-control" id="address" name="address" [(ngModel)]="newUser.address" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Mobile</label>
+      <input type="text" class="form-control" id="mobile" name="mobile" [(ngModel)]="newUser.mobile" required pattern="(012|011|015)[0-9]{8}" minlength="11" maxlength="11">
+      <div *ngIf="addUserForm.submitted && addUserForm.controls['mobile'].invalid" class="invalid-feedback">
+        Mobile number must start with 012, 011, or 015 and be 11 digits long.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="newUser.password" required>
+    </div>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
