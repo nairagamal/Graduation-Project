@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/models';
 import { UtilityService } from '../services/utility.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-management',
@@ -10,10 +11,13 @@ import { UtilityService } from '../services/utility.service';
 export class UserManagementComponent implements OnInit {
   users: User[] = [];
   selectedUser: User | null = null;
-  editingUser: User | null = null; // Declare editingUser as potentially null
+  addUserForm: FormGroup;
+  editUserForm: FormGroup; // Add FormGroup for edit form
+  editingUser: User | null = null;
   showAddUserForm: boolean = false;
-  userFormSubmitted: boolean = false; // Flag to track form submission
-  newUser: User = { // Initialize an empty user object to bind form inputs
+  showEditUserForm: boolean = false; // Flag to show/hide edit form
+  userFormSubmitted: boolean = false;
+  newUser: User = {
     id: 0,
     firstName: '',
     lastName: '',
@@ -25,7 +29,32 @@ export class UserManagementComponent implements OnInit {
     modifiedAt: ''
   };
 
-  constructor(private userService: UtilityService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UtilityService) {
+    this.addUserForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      address: ['', Validators.required],
+      mobile: [
+        '',
+        [Validators.required, Validators.pattern(/^(012|011|015)[0-9]{8}$/)],
+      ],
+      password: ['', Validators.required],
+    });
+
+    this.editUserForm = this.formBuilder.group({
+      id: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      address: ['', Validators.required],
+      mobile: [
+        '',
+        [Validators.required, Validators.pattern(/^(012|011|015)[0-9]{8}$/)],
+      ],
+      password: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -55,41 +84,69 @@ export class UserManagementComponent implements OnInit {
   editUser(user: User): void {
     this.selectedUser = user;
     this.editingUser = { ...user }; // Create a copy for editing
+    this.showEditUserForm = true; // Show the edit form
+    // Populate the edit form with selected user data
+    this.editUserForm.patchValue({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      address: user.address,
+      mobile: user.mobile,
+      password: user.password,
+    });
   }
 
   cancelEdit(): void {
     this.selectedUser = null;
-    this.editingUser = null; // Reset editingUser to null
+    this.editingUser = null;
+    this.showEditUserForm = false; // Hide the edit form
+    this.editUserForm.reset(); // Reset the edit form
+  }
+
+  cancelAddUser(): void {
+    this.showAddUserForm = false; // Hide the add user form
+    this.resetAddUserForm(); // Reset the add user form
   }
 
   saveUserChanges(): void {
-    this.userFormSubmitted = true; // Set form submission flag to true
-    if (this.editingUser) {
-      if (this.isValidForm()) {
-        // Update the user in the list locally
-        const index = this.users.findIndex(user => user.id === this.editingUser?.id);
-        if (index !== -1) {
-          this.users[index] = { ...this.editingUser! };
-        }
-
-        // Send request to update user on the server
-        this.userService.editUser(this.editingUser.id, this.editingUser).subscribe(response => {
-          if (response) {
-            // If response is successful, no further action needed
-            this.selectedUser = null;
-            this.editingUser = null;
-            console.log("User updated successfully.");
-          } else {
-            // If response is unsuccessful, revert the change in the local list
-            this.users[index] = { ...this.selectedUser! };
-            console.error("Failed to save user changes.");
-          }
-        });
+    this.userFormSubmitted = true;
+    if (this.editUserForm.valid) {
+      const updatedUser: User = {
+        id: this.editUserForm.value.id,
+        firstName: this.editUserForm.value.firstName,
+        lastName: this.editUserForm.value.lastName,
+        email: this.editUserForm.value.email,
+        address: this.editUserForm.value.address,
+        mobile: this.editUserForm.value.mobile,
+        password: this.editUserForm.value.password,
+        createdAt: '', // You may not need to update createdAt and modifiedAt here
+        modifiedAt: ''
+      };
+      // Update the user locally
+      const index = this.users.findIndex(user => user.id === updatedUser.id);
+      if (index !== -1) {
+        this.users[index] = { ...updatedUser };
       }
+      // Send request to update user on the server
+      this.userService.editUser(updatedUser.id, updatedUser).subscribe(response => {
+        if (response) {
+          // If response is successful, no further action needed
+          this.selectedUser = null;
+          this.editingUser = null;
+          this.showEditUserForm = false;
+          this.editUserForm.reset();
+          console.log("User updated successfully.");
+        } else {
+          // If response is unsuccessful, revert the change in the local list
+          this.users[index] = { ...this.selectedUser! };
+          console.error("Failed to save user changes.");
+        }
+      });
     }
   }
 
-
+  // Other methods for add user form, validation, etc.
   isValidForm(): boolean {
     // Check if any input field is empty or if the mobile number doesn't meet the required pattern
     return !(
@@ -107,9 +164,6 @@ export class UserManagementComponent implements OnInit {
     const mobilePattern = /^(012|011|015)[0-9]{8}$/;
     return !!mobile && mobilePattern.test(mobile);
   }
-
-
-
 
   toggleAddUserForm(): void {
     this.showAddUserForm = !this.showAddUserForm;
@@ -134,25 +188,68 @@ export class UserManagementComponent implements OnInit {
     };
   }
 
-  addUser(): void {
-    // Add new user to the list locally
-    this.users.push(this.newUser);
-
-    // Add new user to the database
-    this.userService.addUser(this.newUser).subscribe(response => {
-      if (response) {
-        // If response is successful, no further action needed
-        console.log("User added successfully.");
-      } else {
-        // If response is unsuccessful, remove the user from the list
-        this.users.pop();
-        console.error("Failed to add user.");
-      }
-
-      // Reset the newUser object and hide the Add User form
-      this.resetNewUser();
-      this.toggleAddUserForm();
-    });
+  resetAddUserForm(): void {
+    this.addUserForm.reset();
   }
 
+  addUser(): void {
+    const newUser: User = {
+      id: 0, // Set the ID to 0 for now, it will be updated after adding to the database
+      firstName: this.FirstName.value,
+      lastName: this.LastName.value,
+      email: this.Email.value,
+      address: this.Address.value,
+      mobile: this.Mobile.value,
+      password: this.Password.value,
+      createdAt: '',
+      modifiedAt: ''
+    };
+
+    if (this.addUserForm.valid) {
+      this.userService.addUser(newUser).subscribe(
+        (response: any) => {
+          console.log('User added successfully:', response);
+          this.refreshPage();
+
+          newUser.id = response.id;
+          newUser.createdAt = response.createdAt;
+          newUser.modifiedAt = response.modifiedAt;
+
+          // Manually add the new user to the users array
+          this.users.push(newUser);
+
+          this.resetAddUserForm(); // Reset the form
+        },
+        (error: any) => {
+          console.error('Error adding user:', error);
+        }
+      );
+    } else {
+      this.addUserForm.markAllAsTouched();
+    }
+  }
+
+
+  refreshPage(): void {
+    window.location.reload();
+  }
+
+  get FirstName(): FormControl {
+    return this.addUserForm.get('firstName') as FormControl;
+  }
+  get LastName(): FormControl {
+    return this.addUserForm.get('lastName') as FormControl;
+  }
+  get Email(): FormControl {
+    return this.addUserForm.get('email') as FormControl;
+  }
+  get Address(): FormControl {
+    return this.addUserForm.get('address') as FormControl;
+  }
+  get Mobile(): FormControl {
+    return this.addUserForm.get('mobile') as FormControl;
+  }
+  get Password(): FormControl {
+    return this.addUserForm.get('password') as FormControl;
+  }
 }
