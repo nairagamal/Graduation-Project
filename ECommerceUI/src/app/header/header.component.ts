@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+
 import {
   Component,
   ElementRef,
@@ -11,7 +13,7 @@ import { Category, NavigationItem } from '../models/models';
 import { RegisterComponent } from '../register/register.component';
 import { NavigationService } from '../services/navigation.service';
 import { UtilityService } from '../services/utility.service';
-
+import { Route } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -26,7 +28,8 @@ export class HeaderComponent implements OnInit {
   navigationList: NavigationItem[] = [];
   constructor(
     private navigationService: NavigationService,
-    public utilityService: UtilityService
+    public utilityService: UtilityService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +70,9 @@ export class HeaderComponent implements OnInit {
     } else {
       this.cartItems = 0;
     }
+  }
+  gotoabout() {
+    this.router.navigateByUrl('/about');
   }
 
   openModal(name: string) {

@@ -1,9 +1,12 @@
 :host {
-    display: block;
-    height: 4rem;
-    width: 100%;
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    z-index: 20;
+  display: block;
+  height: 4rem;
+  width: 100%;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  z-index: 20;
+}
+.btn-toolbar {
+  justify-content: center; /* Ensure this is a flex container if not already */
 }
