@@ -1,37 +1,57 @@
+<main>
 <div class="my-container mx-auto">
 
     <section class="m-3 p-4 border border-dark my-rounded-corner">
-        <h4 class="w-25 border border-secondary text-center py-2 my-rounded-corner">Payment Info</h4>
-        <table class="table w-50 mx-auto table-bordered table-hover my-shadow">
+      <h4
+      class="text-center py-2 my-rounded-corner my-rounded-corner"
+      style="
+        color: rgb(24, 14, 14);
+        font-weight: bolder;
+        font-size: xx-large;
+
+        text-decoration-color: antiquewhite;
+      "
+    >
+      Payment Informations
+    </h4>        <table class="table w-50 mx-auto table-bordered table-hover my-shadow">
             <tbody>
                 <tr>
-                    <td>Total Items</td>
-                    <td class="fs-5 fw-bold">{{usersCart.cartItems.length}}</td>
+                    <td style="font-weight: bold">Total Items</td>
+                    <td class="fs-5 fw-bold text-secondary">{{usersCart.cartItems.length}}</td>
                 </tr>
                 <tr>
-                    <td>Total Price</td>
-                    <td class="fs-5 fw-bold text-danger"> {{usersPaymentInfo.totalAmount}} </td>
+                    <td style="font-weight: bold">Total Price</td>
+                    <td class="fs-5 fw-bold text-secondary"> {{usersPaymentInfo.totalAmount}} </td>
                 </tr>
                 <tr>
-                    <td>Shipping Charges</td>
-                    <td class="fs-5 fw-bold text-danger">{{usersPaymentInfo.shipingCharges}}</td>
+                    <td style="font-weight: bold">Shipping Charges</td>
+                    <td class="fs-5 fw-bold text-secondary">{{usersPaymentInfo.shipingCharges}}</td>
                 </tr>
                 <tr>
-                    <td>Discount</td>
-                    <td class="fs-5 fw-bold text-success">{{usersPaymentInfo.amountReduced}}</td>
+                    <td style="font-weight: bold">Discount</td>
+                    <td class="fs-5 fw-bold text-secondary">{{usersPaymentInfo.amountReduced}}</td>
                 </tr>
                 <tr>
-                    <td>You Have to Pay</td>
-                    <td class="fs-5 fw-bold text-success">{{usersPaymentInfo.amountPaid}}</td>
+                    <td style="font-weight: bold">You Have to Pay</td>
+                    <td class="fs-5 fw-bold text-dark">{{usersPaymentInfo.amountPaid}}</td>
                 </tr>
             </tbody>
         </table>
     </section>
 
     <section class="m-3 p-4 border border-dark my-rounded-corner">
-        <h4 class="w-25 border border-secondary text-center py-2 my-rounded-corner">Payment Method</h4>
-        <div class="d-flex justify-content-center align-items-center">
-            <h5 class="me-4">Select any Method</h5>
+      <h4
+      class="text-center py-2 my-rounded-corner my-rounded-corner"
+      style="
+        color: rgb(24, 14, 14);
+        font-weight: bolder;
+        font-size: xx-large;
+        text-decoration-color: antiquewhite;
+      "
+    >
+      Payment Method
+    </h4>        <div class="d-flex justify-content-center align-items-center">
+            <h5 class="me-4 text-dark" style="font-weight: bold;" >Select any Method</h5>
             <select class="form-select w-25" [formControl]="selectedPaymentMethod">
                 <option value="0">Open this select menu</option>
                 <option *ngFor="let paymentMethod of paymentMethods" value="{{paymentMethod.id}}">
@@ -43,8 +63,17 @@
     </section>
 
     <section class="m-3 p-4 border border-dark my-rounded-corner">
-        <h4 class="w-25 border border-secondary text-center py-2 my-rounded-corner">Proceed to Payments</h4>
-        <div class="mt-4 w-50" *ngIf="selectedPaymentMethodName !== ''">
+      <h4
+      class="text-center py-2 my-rounded-corner my-rounded-corner"
+      style="
+        color: rgb(24, 14, 14);
+        font-weight: bolder;
+        font-size: xx-large;
+        text-decoration-color: antiquewhite;
+      "
+    >
+      Proceed to Payment
+    </h4>        <div class="mt-4 w-50" *ngIf="selectedPaymentMethodName !== ''">
             <table class="table table-bordered my-shadow">
                 <thead>
                     <tr>
@@ -81,7 +110,6 @@
         </div>
     </section>
 
-    <div *ngIf="!false" class="pt-4">
-        <h2>You have not Logged In</h2>
-    </div>
+
 </div>
+</main>

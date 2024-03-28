@@ -41,29 +41,31 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-        const email = this.Email.value;
-        const password = this.PWD.value;
+      const email = this.Email.value;
+      const password = this.PWD.value;
 
-        if (email === 'admin@gmail.com' && password === '123456') {
-            // Redirect to admin component
-            this.router.navigate(['/admin/user-management']);
-            return;
-        }
+      // Check if email and password match the admin credentials
+      if (email === 'admin@gmail.com' && password === '123456') {
+        // Redirect to admin component
+        this.router.navigate(['/admin']);
+        return; // Exit the function to prevent further execution
+      }
 
-        this.navigationService.loginUser(email, password)
-            .subscribe((res: any) => {
-                if (res.toString() !== 'invalid') {
-                    this.message = 'Logged In Successfully.';
-                    this.utilityService.setUser(res.toString());
-                    console.log(this.utilityService.getUser());
-                    this.router.navigate(['/home']); 
-                } else {
-                    this.message = 'Invalid Credentials!';
-                }
-            });
+      // If not admin credentials, proceed with regular login
+      this.navigationService
+        .loginUser(email, password)
+        .subscribe((res: any) => {
+          if (res.toString() !== 'invalid') {
+            this.message = 'Logged In Successfully.';
+            this.utilityService.setUser(res.toString());
+            console.log(this.utilityService.getUser());
+            this.router.navigate(['/home']); // Redirect to home page
+          } else {
+            this.message = 'Invalid Email or Paswword';
+          }
+        });
     }
-}
-
+  }
 
   resetForm() {
     this.loginForm.reset();
