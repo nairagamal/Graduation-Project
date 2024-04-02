@@ -193,38 +193,30 @@ namespace ECommerce.API.DataAccess
             var product = new Product();
             using (SqlConnection connection = new SqlConnection(dbconnection))
             {
-                SqlCommand command = new SqlCommand()
-                {
-                    Connection = connection
-                };
-
-                string query = "SELECT * FROM Products WHERE ProductId=@Id;";
-                command.CommandText = query;
-                command.Parameters.AddWithValue("@Id", id);
+                SqlCommand command = new SqlCommand("SELECT * FROM Products WHERE ProductId = @ProductId", connection);
+                command.Parameters.AddWithValue("@ProductId", id);
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     product.Id = (int)reader["ProductId"];
-                    product.Title = reader["Title"] != DBNull.Value ? (string)reader["Title"] : null;
-                    product.Description = reader["Description"] != DBNull.Value ? (string)reader["Description"] : null;
+                    product.Title = (string)reader["Title"];
+                    product.Description = (string)reader["Description"];
                     product.Price = (double)reader["Price"];
                     product.Quantity = (int)reader["Quantity"];
-                    product.Color = reader["Color"] != DBNull.Value ? (string)reader["Color"] : null;
-                    product.ModelName = reader["ModelName"] != DBNull.Value ? (string)reader["ModelName"] : null;
-                    product.BrandName = reader["BrandName"] != DBNull.Value ? (string)reader["BrandName"] : null;
-                    product.ImageUrl1 = reader["ImageUrl1"] != DBNull.Value ? (string)reader["ImageUrl1"] : null;
-                    product.ImageUrl2 = reader["ImageUrl2"] != DBNull.Value ? (string)reader["ImageUrl2"] : null;
-                    product.ImageUrl3 = reader["ImageUrl3"] != DBNull.Value ? (string)reader["ImageUrl3"] : null;
-                    product.ImageUrl4 = reader["ImageUrl4"] != DBNull.Value ? (string)reader["ImageUrl4"] : null;
-                    product.ImageUrl5 = reader["ImageUrl5"] != DBNull.Value ? (string)reader["ImageUrl5"] : null;
 
-                    var categoryid = (int)reader["CategoryId"];
-                    product.ProductCategory = GetProductCategory(categoryid);
+                    // Retrieve image data as byte array
+                    if (reader["ImageName"] != DBNull.Value)
+                    {
+                        product.ImageName = (byte[])reader["ImageName"];
+                    }
 
-                    var offerid = (int)reader["OfferId"];
-                    product.Offer = GetOffer(offerid);
+                    var categoryId = (int)reader["CategoryId"];
+                    product.ProductCategory = GetProductCategory(categoryId);
+
+                    var offerId = (int)reader["OfferId"];
+                    product.Offer = GetOffer(offerId);
                 }
             }
             return product;
@@ -331,10 +323,10 @@ namespace ECommerce.API.DataAccess
                     Connection = connection
                 };
 
-                string query = "SELECT TOP " + count + " * FROM Products WHERE CategoryId=(SELECT CategoryId FROM ProductCategories WHERE Category=@c AND SubCategory=@s) ORDER BY NEWID();";
+                string query = "SELECT TOP " + count + " * FROM Products WHERE CategoryId=(SELECT CategoryId FROM ProductCategories WHERE Category=@c AND SubCategory=@s) ORDER BY newid();";
                 command.CommandText = query;
-                command.Parameters.AddWithValue("@c", category);
-                command.Parameters.AddWithValue("@s", subcategory);
+                command.Parameters.Add("@c", SqlDbType.NVarChar).Value = category;
+                command.Parameters.Add("@s", SqlDbType.NVarChar).Value = subcategory;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -347,27 +339,26 @@ namespace ECommerce.API.DataAccess
                         Description = (string)reader["Description"],
                         Price = (double)reader["Price"],
                         Quantity = (int)reader["Quantity"],
-                        Color = (string)reader["Color"],
-                        ModelName = (string)reader["ModelName"],
-                        BrandName = (string)reader["BrandName"],
-                        ImageUrl1 = (string)reader["ImageUrl1"],
-                        ImageUrl2 = reader["ImageUrl2"] == DBNull.Value ? null : (string)reader["ImageUrl2"],
-                        ImageUrl3 = reader["ImageUrl3"] == DBNull.Value ? null : (string)reader["ImageUrl3"],
-                        ImageUrl4 = reader["ImageUrl4"] == DBNull.Value ? null : (string)reader["ImageUrl4"],
-                        ImageUrl5 = reader["ImageUrl5"] == DBNull.Value ? null : (string)reader["ImageUrl5"]
                     };
 
-                    var categoryid = (int)reader["CategoryId"];
-                    product.ProductCategory = GetProductCategory(categoryid);
+                    // Retrieve image data as byte array
+                    if (reader["ImageName"] != DBNull.Value)
+                    {
+                        product.ImageName = (byte[])reader["ImageName"];
+                    }
 
-                    var offerid = (int)reader["OfferId"];
-                    product.Offer = GetOffer(offerid);
+                    var categoryId = (int)reader["CategoryId"];
+                    product.ProductCategory = GetProductCategory(categoryId);
+
+                    var offerId = (int)reader["OfferId"];
+                    product.Offer = GetOffer(offerId);
 
                     products.Add(product);
                 }
             }
             return products;
         }
+
 
         public List<Offer> GetOffers()
         {
@@ -456,10 +447,32 @@ namespace ECommerce.API.DataAccess
             }
         }
 
+
+        public bool RemoveCartItem(int cartItemId)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand
+                {
+                    Connection = connection
+                };
+
+                connection.Open();
+                string query = "DELETE FROM CartItems WHERE CartItemId = @CartItemId;";
+                command.CommandText = query;
+                command.Parameters.AddWithValue("@CartItemId", cartItemId);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+
+
         public int InsertOrder(Order order)
         {
             int value = 0;
-
             string dateformat = DateTime.Now.ToString();
 
             using (SqlConnection connection = new(dbconnection))
@@ -499,6 +512,373 @@ namespace ECommerce.API.DataAccess
             return value;
         }
 
+
+        public int InsertPayment(Payment payment)
+        {
+            int value = 0;
+            using (SqlConnection connection = new(dbconnection))
+            {
+                SqlCommand command = new()
+                {
+                    Connection = connection
+                };
+
+                string query = @"INSERT INTO Payments (PaymentMethodId, UserId, TotalAmount, ShippingCharges, AmountReduced, AmountPaid, CreatedAt) 
+                                VALUES (@pmid, @uid, @ta, @sc, @ar, @ap, @cat);";
+
+                command.CommandText = query;
+                command.Parameters.Add("@pmid", System.Data.SqlDbType.Int).Value = payment.PaymentMethod.Id;
+                command.Parameters.Add("@uid", System.Data.SqlDbType.Int).Value = payment.User.Id;
+                command.Parameters.Add("@ta", System.Data.SqlDbType.NVarChar).Value = payment.TotalAmount;
+                command.Parameters.Add("@sc", System.Data.SqlDbType.NVarChar).Value = payment.ShipingCharges;
+                command.Parameters.Add("@ar", System.Data.SqlDbType.NVarChar).Value = payment.AmountReduced;
+                command.Parameters.Add("@ap", System.Data.SqlDbType.NVarChar).Value = payment.AmountPaid;
+                command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = payment.CreatedAt;
+
+                connection.Open();
+                value = command.ExecuteNonQuery();
+
+                if (value > 0)
+                {
+                    query = "SELECT TOP 1 Id FROM Payments ORDER BY Id DESC;";
+                    command.CommandText = query;
+                    value = (int)command.ExecuteScalar();
+                }
+                else
+                {
+                    value = 0;
+                }
+            }
+            return value;
+        }
+
+        public void InsertReview(Review review)
+        {
+            using SqlConnection connection = new(dbconnection);
+            SqlCommand command = new()
+            {
+                Connection = connection
+            };
+
+            string query = "INSERT INTO Reviews (UserId, ProductId, Review, CreatedAt) VALUES (@uid, @pid, @rv, @cat);";
+            command.CommandText = query;
+            command.Parameters.Add("@uid", System.Data.SqlDbType.Int).Value = review.User.Id;
+            command.Parameters.Add("@pid", System.Data.SqlDbType.Int).Value = review.Product.Id;
+            command.Parameters.Add("@rv", System.Data.SqlDbType.NVarChar).Value = review.Value;
+            command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = review.CreatedAt;
+
+            connection.Open();
+            command.ExecuteNonQuery();
+        }
+
+        public bool InsertUser(User user)
+        {
+            using (SqlConnection connection = new(dbconnection))
+            {
+                SqlCommand command = new()
+                {
+                    Connection = connection
+                };
+                connection.Open();
+
+                string query = "SELECT COUNT(*) FROM Users WHERE Email='" + user.Email + "';";
+                command.CommandText = query;
+                int count = (int)command.ExecuteScalar();
+                if (count > 0)
+                {
+                    connection.Close();
+                    return false;
+                }
+
+                query = "INSERT INTO Users (FirstName, LastName, Address, Mobile, Email, Password, CreatedAt, ModifiedAt) values (@fn, @ln, @add, @mb, @em, @pwd, @cat, @mat);";
+
+                command.CommandText = query;
+                command.Parameters.Add("@fn", System.Data.SqlDbType.NVarChar).Value = user.FirstName;
+                command.Parameters.Add("@ln", System.Data.SqlDbType.NVarChar).Value = user.LastName;
+                command.Parameters.Add("@add", System.Data.SqlDbType.NVarChar).Value = user.Address;
+                command.Parameters.Add("@mb", System.Data.SqlDbType.NVarChar).Value = user.Mobile;
+                command.Parameters.Add("@em", System.Data.SqlDbType.NVarChar).Value = user.Email;
+                command.Parameters.Add("@pwd", System.Data.SqlDbType.NVarChar).Value = user.Password;
+                command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = user.CreatedAt;
+                command.Parameters.Add("@mat", System.Data.SqlDbType.NVarChar).Value = user.ModifiedAt;
+
+                command.ExecuteNonQuery();
+            }
+            return true;
+        }
+
+        public bool EditProduct(int productId, Product product)
+        {
+
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                string query = @"
+            UPDATE Products 
+            SET Title = @Title, 
+                Description = @Description, 
+                CategoryId = @CategoryId, 
+                OfferId = @OfferId, 
+                Price = @Price, 
+                Quantity = @Quantity, 
+                ImageName = @ImageName 
+            WHERE ProductId = @ProductId;";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Title", product.Title);
+                command.Parameters.AddWithValue("@Description", product.Description);
+                command.Parameters.AddWithValue("@CategoryId", product.ProductCategory.Id);
+                command.Parameters.AddWithValue("@OfferId", product.Offer.Id);
+                command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Quantity", product.Quantity);
+                command.Parameters.AddWithValue("@ImageName", product.ImageName);
+                command.Parameters.AddWithValue("@ProductId", productId);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+
+
+        public bool InsertProduct(Product product)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                string query = @"INSERT INTO Products (Title, Description, CategoryId, OfferId, Price, Quantity, ImageName) 
+                                 VALUES (@Title, @Description, @CategoryId, @OfferId, @Price, @Quantity, @ImageName);";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Title", product.Title);
+                command.Parameters.AddWithValue("@Description", product.Description);
+                command.Parameters.AddWithValue("@CategoryId", product.ProductCategory.Id); // Assuming ProductCategory has an Id property
+                command.Parameters.AddWithValue("@OfferId", product.Offer.Id); // Assuming Offer has an Id property
+                command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Quantity", product.Quantity);
+                command.Parameters.AddWithValue("@ImageName", product.ImageName);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+
+        public List<Product> GetAllProducts()
+        {
+            var products = new List<Product>();
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Products;", connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var product = new Product
+                    {
+                        Id = (int)reader["ProductId"],
+                        Title = (string)reader["Title"],
+                        Description = (string)reader["Description"],
+                        Price = (double)reader["Price"],
+                        Quantity = (int)reader["Quantity"],
+                    };
+
+                    // Retrieve image data as byte array
+                    if (reader["ImageName"] != DBNull.Value)
+                    {
+                        product.ImageName = (byte[])reader["ImageName"];
+                    }
+
+                    var categoryId = (int)reader["CategoryId"];
+                    product.ProductCategory = GetProductCategory(categoryId);
+
+                    var offerId = (int)reader["OfferId"];
+                    product.Offer = GetOffer(offerId);
+
+                    products.Add(product);
+                }
+            }
+            return products;
+        }
+
+        public bool DeleteProduct(int productId)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("DELETE FROM Products WHERE ProductId = @ProductId;", connection);
+                command.Parameters.AddWithValue("@ProductId", productId);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+
+        public List<User> GetAllUsers()
+        {
+            var users = new List<User>();
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Users;", connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var user = new User
+                    {
+                        Id = (int)reader["UserId"],
+                        FirstName = (string)reader["FirstName"],
+                        LastName = (string)reader["LastName"],
+                        Email = (string)reader["Email"],
+                        Address = (string)reader["Address"],
+                        Mobile = (string)reader["Mobile"],
+                        Password = (string)reader["Password"],
+                        CreatedAt = (string)reader["CreatedAt"],
+                        ModifiedAt = (string)reader["ModifiedAt"]
+                    };
+                    users.Add(user);
+                }
+            }
+            return users;
+        }
+
+        public bool AddUser(User user)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand(@"INSERT INTO Users (FirstName, LastName, Address, Mobile, Email, Password, CreatedAt, ModifiedAt) 
+                                              VALUES (@FirstName, @LastName, @Address, @Mobile, @Email, @Password, @CreatedAt, @ModifiedAt);", connection);
+
+                command.Parameters.AddWithValue("@FirstName", user.FirstName);
+                command.Parameters.AddWithValue("@LastName", user.LastName);
+                command.Parameters.AddWithValue("@Address", user.Address);
+                command.Parameters.AddWithValue("@Mobile", user.Mobile);
+                command.Parameters.AddWithValue("@Email", user.Email);
+                command.Parameters.AddWithValue("@Password", user.Password);
+                command.Parameters.AddWithValue("@CreatedAt", user.CreatedAt);
+                command.Parameters.AddWithValue("@ModifiedAt", user.ModifiedAt);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+        public bool EditUser(int userId, User user)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand(@"UPDATE Users 
+                                               SET FirstName = @FirstName, 
+                                                   LastName = @LastName, 
+                                                   Address = @Address, 
+                                                   Mobile = @Mobile, 
+                                                   Email = @Email, 
+                                                   Password = @Password, 
+                                                   ModifiedAt = @ModifiedAt 
+                                               WHERE UserId = @UserId;", connection);
+
+                command.Parameters.AddWithValue("@FirstName", user.FirstName);
+                command.Parameters.AddWithValue("@LastName", user.LastName);
+                command.Parameters.AddWithValue("@Address", user.Address);
+                command.Parameters.AddWithValue("@Mobile", user.Mobile);
+                command.Parameters.AddWithValue("@Email", user.Email);
+                command.Parameters.AddWithValue("@Password", user.Password);
+                command.Parameters.AddWithValue("@ModifiedAt", user.ModifiedAt);
+                command.Parameters.AddWithValue("@UserId", userId);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+        public bool DeleteUser(int userId)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("DELETE FROM Users WHERE UserId = @UserId;", connection);
+                command.Parameters.AddWithValue("@UserId", userId);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+        }
+
+        public string IsUserPresent(string email, string password)
+        {
+            User user = new();
+            using (SqlConnection connection = new(dbconnection))
+            {
+                SqlCommand command = new()
+                {
+                    Connection = connection
+                };
+
+                connection.Open();
+                string query = "SELECT COUNT(*) FROM Users WHERE Email='" + email + "' AND Password='" + password + "';";
+                command.CommandText = query;
+                int count = (int)command.ExecuteScalar();
+                if (count == 0)
+                {
+                    connection.Close();
+                    return "";
+                }
+
+                query = "SELECT * FROM Users WHERE Email='" + email + "' AND Password='" + password + "';";
+                command.CommandText = query;
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    user.Id = (int)reader["UserId"];
+                    user.FirstName = (string)reader["FirstName"];
+                    user.LastName = (string)reader["LastName"];
+                    user.Email = (string)reader["Email"];
+                    user.Address = (string)reader["Address"];
+                    user.Mobile = (string)reader["Mobile"];
+                    user.Password = (string)reader["Password"];
+                    user.CreatedAt = (string)reader["CreatedAt"];
+                    user.ModifiedAt = (string)reader["ModifiedAt"];
+                }
+
+                string key = "MNU66iBl3T5rh6H52i69";
+                string duration = "60";
+                var symmetrickey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+                var credentials = new SigningCredentials(symmetrickey, SecurityAlgorithms.HmacSha256);
+
+                var claims = new[]
+                {
+                    new Claim("id", user.Id.ToString()),
+                    new Claim("firstName", user.FirstName),
+                    new Claim("lastName", user.LastName),
+                    new Claim("address", user.Address),
+                    new Claim("mobile", user.Mobile),
+                    new Claim("email", user.Email),
+                    new Claim("createdAt", user.CreatedAt),
+                    new Claim("modifiedAt", user.ModifiedAt)
+                };
+
+                var jwtToken = new JwtSecurityToken(
+                    issuer: "localhost",
+                    audience: "localhost",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(Int32.Parse(duration)),
+                    signingCredentials: credentials);
+
+                return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            }
+            return "";
+        }
 
         public Order GetOrder(int orderId)
         {
@@ -603,429 +983,71 @@ namespace ECommerce.API.DataAccess
         }
 
 
-
         public Payment GetPayment(int paymentId)
         {
             Payment payment = null;
+
             using (SqlConnection connection = new SqlConnection(dbconnection))
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM Payments WHERE Id = @PaymentId", connection);
                 command.Parameters.AddWithValue("@PaymentId", paymentId);
 
                 connection.Open();
+
                 SqlDataReader reader = command.ExecuteReader();
+
                 if (reader.Read())
                 {
                     payment = new Payment
                     {
                         Id = (int)reader["Id"],
-                        PaymentMethod = new PaymentMethod
-                        {
-
-                        },
-                        User = new User
-                        {
-
-                        },
                         TotalAmount = (int)reader["TotalAmount"],
-                        ShippingCharges = (int)reader["ShippingCharges"],
+                        ShipingCharges = (int)reader["ShippingCharges"],
                         AmountReduced = (int)reader["AmountReduced"],
                         AmountPaid = (int)reader["AmountPaid"],
                         CreatedAt = (string)reader["CreatedAt"]
                     };
+
+                    int userId = (int)reader["UserId"];
+                    User user = GetUser(userId);
+                    payment.User = user;
+
+                    int paymentMethodId = (int)reader["PaymentMethodId"];
+                    PaymentMethod paymentMethod = GetPaymentMethodById(paymentMethodId);
+                    payment.PaymentMethod = paymentMethod;
                 }
             }
+
             return payment;
         }
-
-
-
-        public int InsertPayment(Payment payment)
+        public PaymentMethod GetPaymentMethodById(int id)
         {
-            int value = 0;
-            using (SqlConnection connection = new(dbconnection))
-            {
-                SqlCommand command = new()
-                {
-                    Connection = connection
-                };
+            PaymentMethod paymentMethod = null;
 
-                string query = @"INSERT INTO Payments (PaymentMethodId, UserId, TotalAmount, ShippingCharges, AmountReduced, AmountPaid, CreatedAt) 
-                                VALUES (@pmid, @uid, @ta, @sc, @ar, @ap, @cat);";
-
-                command.CommandText = query;
-                command.Parameters.Add("@pmid", System.Data.SqlDbType.Int).Value = payment.PaymentMethod.Id;
-                command.Parameters.Add("@uid", System.Data.SqlDbType.Int).Value = payment.User.Id;
-                command.Parameters.Add("@ta", System.Data.SqlDbType.NVarChar).Value = payment.TotalAmount;
-                command.Parameters.Add("@sc", System.Data.SqlDbType.NVarChar).Value = payment.ShippingCharges;
-                command.Parameters.Add("@ar", System.Data.SqlDbType.NVarChar).Value = payment.AmountReduced;
-                command.Parameters.Add("@ap", System.Data.SqlDbType.NVarChar).Value = payment.AmountPaid;
-                command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = payment.CreatedAt;
-
-                connection.Open();
-                value = command.ExecuteNonQuery();
-
-                if (value > 0)
-                {
-                    query = "SELECT TOP 1 Id FROM Payments ORDER BY Id DESC;";
-                    command.CommandText = query;
-                    value = (int)command.ExecuteScalar();
-                }
-                else
-                {
-                    value = 0;
-                }
-            }
-            return value;
-        }
-
-        public void InsertReview(Review review)
-        {
-            using SqlConnection connection = new(dbconnection);
-            SqlCommand command = new()
-            {
-                Connection = connection
-            };
-
-            string query = "INSERT INTO Reviews (UserId, ProductId, Review, CreatedAt) VALUES (@uid, @pid, @rv, @cat);";
-            command.CommandText = query;
-            command.Parameters.Add("@uid", System.Data.SqlDbType.Int).Value = review.User.Id;
-            command.Parameters.Add("@pid", System.Data.SqlDbType.Int).Value = review.Product.Id;
-            command.Parameters.Add("@rv", System.Data.SqlDbType.NVarChar).Value = review.Value;
-            command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = review.CreatedAt;
-
-            connection.Open();
-            command.ExecuteNonQuery();
-        }
-
-        public bool InsertUser(User user)
-        {
-            using (SqlConnection connection = new(dbconnection))
-            {
-                SqlCommand command = new()
-                {
-                    Connection = connection
-                };
-                connection.Open();
-
-                string query = "SELECT COUNT(*) FROM Users WHERE Email='" + user.Email + "';";
-                command.CommandText = query;
-                int count = (int)command.ExecuteScalar();
-                if (count > 0)
-                {
-                    connection.Close();
-                    return false;
-                }
-
-                query = "INSERT INTO Users (FirstName, LastName, Address, Mobile, Email, Password, CreatedAt, ModifiedAt) values (@fn, @ln, @add, @mb, @em, @pwd, @cat, @mat);";
-
-                command.CommandText = query;
-                command.Parameters.Add("@fn", System.Data.SqlDbType.NVarChar).Value = user.FirstName;
-                command.Parameters.Add("@ln", System.Data.SqlDbType.NVarChar).Value = user.LastName;
-                command.Parameters.Add("@add", System.Data.SqlDbType.NVarChar).Value = user.Address;
-                command.Parameters.Add("@mb", System.Data.SqlDbType.NVarChar).Value = user.Mobile;
-                command.Parameters.Add("@em", System.Data.SqlDbType.NVarChar).Value = user.Email;
-                command.Parameters.Add("@pwd", System.Data.SqlDbType.NVarChar).Value = user.Password;
-                command.Parameters.Add("@cat", System.Data.SqlDbType.NVarChar).Value = user.CreatedAt;
-                command.Parameters.Add("@mat", System.Data.SqlDbType.NVarChar).Value = user.ModifiedAt;
-
-                command.ExecuteNonQuery();
-            }
-            return true;
-        }
-
-        public bool EditProduct(int productId, Product product)
-        {
             using (SqlConnection connection = new SqlConnection(dbconnection))
             {
-                string query = @"
-                UPDATE Products 
-                SET Title = @Title, 
-                Description = @Description, 
-                CategoryId = @CategoryId, 
-                OfferId = @OfferId, 
-                Price = @Price, 
-                Quantity = @Quantity, 
-                Color = @Color, 
-                ModelName = @ModelName, 
-                BrandName = @BrandName, 
-                ImageUrl1 = @ImageUrl1, 
-                ImageUrl2 = @ImageUrl2, 
-                ImageUrl3 = @ImageUrl3, 
-                ImageUrl4 = @ImageUrl4, 
-                ImageUrl5 = @ImageUrl5 
-                WHERE ProductId = @ProductId;";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Title", product.Title);
-                command.Parameters.AddWithValue("@Description", product.Description);
-                command.Parameters.AddWithValue("@CategoryId", product.ProductCategory.Id);
-                command.Parameters.AddWithValue("@OfferId", product.Offer.Id);
-                command.Parameters.AddWithValue("@Price", product.Price);
-                command.Parameters.AddWithValue("@Quantity", product.Quantity);
-                command.Parameters.AddWithValue("@Color", product.Color);
-                command.Parameters.AddWithValue("@ModelName", product.ModelName);
-                command.Parameters.AddWithValue("@BrandName", product.BrandName);
-                command.Parameters.AddWithValue("@ImageUrl1", product.ImageUrl1);
-                command.Parameters.AddWithValue("@ImageUrl2", (object)product.ImageUrl2 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ImageUrl3", (object)product.ImageUrl3 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ImageUrl4", (object)product.ImageUrl4 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ImageUrl5", (object)product.ImageUrl5 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ProductId", productId);
+                SqlCommand command = new SqlCommand("SELECT * FROM PaymentMethods WHERE PaymentMethodId = @Id", connection);
+                command.Parameters.AddWithValue("@Id", id);
 
                 connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
 
-                return rowsAffected > 0;
-            }
-        }
-
-        public bool InsertProduct(Product product)
-        {
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                string query = @"INSERT INTO Products (Title, Description, CategoryId, OfferId, Price, Quantity, Color, ModelName, BrandName, ImageUrl1, ImageUrl2, ImageUrl3, ImageUrl4, ImageUrl5) 
-                         VALUES (@Title, @Description, @CategoryId, @OfferId, @Price, @Quantity, @Color, @ModelName, @BrandName, @ImageUrl1, @ImageUrl2, @ImageUrl3, @ImageUrl4, @ImageUrl5);";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Title", product.Title);
-                command.Parameters.AddWithValue("@Description", product.Description);
-                command.Parameters.AddWithValue("@CategoryId", product.ProductCategory.Id);
-                command.Parameters.AddWithValue("@OfferId", product.Offer.Id);
-                command.Parameters.AddWithValue("@Price", product.Price);
-                command.Parameters.AddWithValue("@Quantity", product.Quantity);
-                command.Parameters.AddWithValue("@Color", product.Color);
-                command.Parameters.AddWithValue("@ModelName", product.ModelName);
-                command.Parameters.AddWithValue("@BrandName", product.BrandName);
-                command.Parameters.AddWithValue("@ImageUrl1", product.ImageUrl1);
-                command.Parameters.AddWithValue("@ImageUrl2", (object)product.ImageUrl2 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ImageUrl3", (object)product.ImageUrl3 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ImageUrl4", (object)product.ImageUrl4 ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ImageUrl5", (object)product.ImageUrl5 ?? DBNull.Value);
-
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-        }
-
-        public List<Product> GetAllProducts()
-        {
-            var products = new List<Product>();
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                SqlCommand command = new SqlCommand("SELECT * FROM Products;", connection);
-
-                connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+
+                if (reader.Read())
                 {
-                    var product = new Product
+                    paymentMethod = new PaymentMethod
                     {
-                        Id = (int)reader["ProductId"],
-                        Title = reader["Title"] != DBNull.Value ? (string)reader["Title"] : null,
-                        Description = reader["Description"] != DBNull.Value ? (string)reader["Description"] : null,
-                        Price = (double)reader["Price"],
-                        Quantity = (int)reader["Quantity"],
-                        Color = reader["Color"] != DBNull.Value ? (string)reader["Color"] : null,
-                        ModelName = reader["ModelName"] != DBNull.Value ? (string)reader["ModelName"] : null,
-                        BrandName = reader["BrandName"] != DBNull.Value ? (string)reader["BrandName"] : null,
-                        ImageUrl1 = reader["ImageUrl1"] != DBNull.Value ? (string)reader["ImageUrl1"] : null,
-                        ImageUrl2 = reader["ImageUrl2"] != DBNull.Value ? (string)reader["ImageUrl2"] : null,
-                        ImageUrl3 = reader["ImageUrl3"] != DBNull.Value ? (string)reader["ImageUrl3"] : null,
-                        ImageUrl4 = reader["ImageUrl4"] != DBNull.Value ? (string)reader["ImageUrl4"] : null,
-                        ImageUrl5 = reader["ImageUrl5"] != DBNull.Value ? (string)reader["ImageUrl5"] : null
+                        Id = (int)reader["PaymentMethodId"],
+                        Type = (string)reader["Type"],
+                        Provider = (string)reader["Provider"],
+                        Available = Convert.ToBoolean(reader["Available"]), // Convert to boolean
+                        Reason = (string)reader["Reason"]
                     };
-
-                    var categoryId = (int)reader["CategoryId"];
-                    product.ProductCategory = GetProductCategory(categoryId);
-
-                    var offerId = (int)reader["OfferId"];
-                    product.Offer = GetOffer(offerId);
-
-                    products.Add(product);
                 }
             }
-            return products;
+
+            return paymentMethod;
         }
-
-        public bool DeleteProduct(int productId)
-        {
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Products WHERE ProductId = @ProductId;", connection);
-                command.Parameters.AddWithValue("@ProductId", productId);
-
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-        }
-
-        public List<User> GetAllUsers()
-        {
-            var users = new List<User>();
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                SqlCommand command = new SqlCommand("SELECT * FROM Users;", connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    var user = new User
-                    {
-                        Id = (int)reader["UserId"],
-                        FirstName = (string)reader["FirstName"],
-                        LastName = (string)reader["LastName"],
-                        Email = (string)reader["Email"],
-                        Address = (string)reader["Address"],
-                        Mobile = (string)reader["Mobile"],
-                        Password = (string)reader["Password"],
-                        CreatedAt = (string)reader["CreatedAt"],
-                        ModifiedAt = (string)reader["ModifiedAt"]
-                    };
-                    users.Add(user);
-                }
-            }
-            return users;
-        }
-
-        public bool AddUser(User user)
-        {
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                SqlCommand command = new SqlCommand(@"INSERT INTO Users (FirstName, LastName, Address, Mobile, Email, Password, CreatedAt, ModifiedAt) 
-                                              VALUES (@FirstName, @LastName, @Address, @Mobile, @Email, @Password, @CreatedAt, @ModifiedAt);", connection);
-
-                command.Parameters.AddWithValue("@FirstName", user.FirstName);
-                command.Parameters.AddWithValue("@LastName", user.LastName);
-                command.Parameters.AddWithValue("@Address", user.Address);
-                command.Parameters.AddWithValue("@Mobile", user.Mobile);
-                command.Parameters.AddWithValue("@Email", user.Email);
-                command.Parameters.AddWithValue("@Password", user.Password);
-                command.Parameters.AddWithValue("@CreatedAt", user.CreatedAt);
-                command.Parameters.AddWithValue("@ModifiedAt", user.ModifiedAt);
-
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-        }
-
-        public bool EditUser(int userId, User user)
-        {
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                SqlCommand command = new SqlCommand(@"UPDATE Users 
-                                               SET FirstName = @FirstName, 
-                                                   LastName = @LastName, 
-                                                   Address = @Address, 
-                                                   Mobile = @Mobile, 
-                                                   Email = @Email, 
-                                                   Password = @Password, 
-                                                   ModifiedAt = @ModifiedAt 
-                                               WHERE UserId = @UserId;", connection);
-
-                command.Parameters.AddWithValue("@FirstName", user.FirstName);
-                command.Parameters.AddWithValue("@LastName", user.LastName);
-                command.Parameters.AddWithValue("@Address", user.Address);
-                command.Parameters.AddWithValue("@Mobile", user.Mobile);
-                command.Parameters.AddWithValue("@Email", user.Email);
-                command.Parameters.AddWithValue("@Password", user.Password);
-                command.Parameters.AddWithValue("@ModifiedAt", user.ModifiedAt);
-                command.Parameters.AddWithValue("@UserId", userId);
-
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-        }
-
-        public bool DeleteUser(int userId)
-        {
-            using (SqlConnection connection = new SqlConnection(dbconnection))
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Users WHERE UserId = @UserId;", connection);
-                command.Parameters.AddWithValue("@UserId", userId);
-
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-        }
-
-
-        public string IsUserPresent(string email, string password)
-        {
-            User user = new();
-            using (SqlConnection connection = new(dbconnection))
-            {
-                SqlCommand command = new()
-                {
-                    Connection = connection
-                };
-
-                connection.Open();
-                string query = "SELECT COUNT(*) FROM Users WHERE Email='" + email + "' AND Password='" + password + "';";
-                command.CommandText = query;
-                int count = (int)command.ExecuteScalar();
-                if (count == 0)
-                {
-                    connection.Close();
-                    return "";
-                }
-
-                query = "SELECT * FROM Users WHERE Email='" + email + "' AND Password='" + password + "';";
-                command.CommandText = query;
-
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    user.Id = (int)reader["UserId"];
-                    user.FirstName = (string)reader["FirstName"];
-                    user.LastName = (string)reader["LastName"];
-                    user.Email = (string)reader["Email"];
-                    user.Address = (string)reader["Address"];
-                    user.Mobile = (string)reader["Mobile"];
-                    user.Password = (string)reader["Password"];
-                    user.CreatedAt = (string)reader["CreatedAt"];
-                    user.ModifiedAt = (string)reader["ModifiedAt"];
-                }
-
-                string key = "MNU66iBl3T5rh6H52i69";
-                string duration = "60";
-                var symmetrickey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-                var credentials = new SigningCredentials(symmetrickey, SecurityAlgorithms.HmacSha256);
-
-                var claims = new[]
-                {
-                    new Claim("id", user.Id.ToString()),
-                    new Claim("firstName", user.FirstName),
-                    new Claim("lastName", user.LastName),
-                    new Claim("address", user.Address),
-                    new Claim("mobile", user.Mobile),
-                    new Claim("email", user.Email),
-                    new Claim("createdAt", user.CreatedAt),
-                    new Claim("modifiedAt", user.ModifiedAt)
-                };
-
-                var jwtToken = new JwtSecurityToken(
-                    issuer: "localhost",
-                    audience: "localhost",
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(Int32.Parse(duration)),
-                    signingCredentials: credentials);
-
-                return new JwtSecurityTokenHandler().WriteToken(jwtToken);
-            }
-            return "";
-        }
-
 
 
         public List<Order> GetOrdersThisWeek()
@@ -1099,7 +1121,79 @@ namespace ECommerce.API.DataAccess
 
             return ordersLastMonth;
         }
+        public string GetProductImage(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT ImageName FROM Products WHERE ProductId = @Id", connection);
+                command.Parameters.AddWithValue("@Id", id);
+
+                connection.Open();
+                object ImageName = command.ExecuteScalar();
+                if (ImageName != DBNull.Value)
+                {
+                    return (string)ImageName;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
+
+        //----------
+        public List<Product> GetAllProductsFlat()
+        {
+            var products = new List<Product>();
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Products;", connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var product = new Product
+                    {
+                        Id = (int)reader["ProductId"],
+                        Title = (string)reader["Title"],
+                        Description = (string)reader["Description"],
+                        Price = (double)reader["Price"],
+                        Quantity = (int)reader["Quantity"],
+                    };
+
+                    // Retrieve image data as byte array
+                    if (reader["ImageName"] != DBNull.Value)
+                    {
+                        product.ImageName = (byte[])reader["ImageName"];
+                    }
+
+                    products.Add(product);
+                }
+            }
+            return products;
+        }
+        //-----
+
+      
+
+
+        //--
+
+        public void SaveImageData(int productId, byte[] ImageName)
+        {
+            using (SqlConnection connection = new SqlConnection(dbconnection))
+            {
+                SqlCommand command = new SqlCommand("UPDATE Products SET ImageName = @ImageName WHERE ProductId = @ProductId", connection);
+                command.Parameters.AddWithValue("@ImageName", ImageName);
+                command.Parameters.AddWithValue("@ProductId", productId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
     }
 }
-
-

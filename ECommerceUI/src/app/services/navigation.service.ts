@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { catchError, map, throwError } from 'rxjs';
 import { Product } from '../models/models';
 import { Observable } from 'rxjs';
 import {
@@ -88,11 +88,16 @@ export class NavigationService {
     return this.http.post(url, null, { responseType: 'text' });
   }
 
-  removeCartItemFromBackend(cartItem: any): Observable<any> {
-    // Make an HTTP request to the backend to remove the item from the cart
-    let url = this.baseurl + 'RemoveCartItem';
-    return this.http.post(url, cartItem);
+  // removeCartItemFromBackend(cartItem: any): Observable<any> {
+  //   let url = this.baseurl + 'RemoveCartItem';
+  //   return this.http.post(url, cartItem);
+  // }
+
+  removeCartItem(cartItemId: number): Observable<any> {
+    const url = `${this.baseurl}RemoveCartItem/${cartItemId}`;
+    return this.http.delete(url);
   }
+
 
   getActiveCartOfUser(userid: number) {
     let url = this.baseurl + 'GetActiveCartOfUser/' + userid;
@@ -152,12 +157,55 @@ export class NavigationService {
             },
             price: product.price,
             quantity: product.quantity,
-            imageName: product.imageName,
+            imageName: this.convertToUint8Array(product.imageName),
           };
           return mappedProduct;
         })
       )
     );
+  }
+
+
+  getAllProductsFlat(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseurl + 'GetAllProductsFlat');
+  }
+
+  getImage(productId: number): Observable<string> {
+    const url = `${this.baseurl}GetImage/${productId}`;
+    return this.http.get(url, { responseType: 'arraybuffer' }).pipe(
+      map((data: ArrayBuffer) => this.arrayBufferToBase64(data))
+    );
+  }
+
+  getImageData(productId: number): Observable<ArrayBuffer> {
+    const url = `${this.baseurl}GetImage/${productId}`;
+    return this.http.get(url, { responseType: 'arraybuffer' });
+  }
+
+  convertImageToBase64(imageData: Uint8Array): string {
+    const bytes: number[] = Array.from(imageData);
+    const base64String = btoa(String.fromCharCode.apply(null, bytes));
+    return 'data:image/png;base64,' + base64String;
+  }
+
+
+  private arrayBufferToBase64(buffer: ArrayBuffer): string {
+    const bytes = new Uint8Array(buffer);
+    let binary = '';
+    for (let i = 0; i < bytes.byteLength; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return 'data:image/png;base64,' + btoa(binary);
+  }
+
+  private convertToUint8Array(imageName: string): Uint8Array {
+    const binaryString = window.atob(imageName);
+    const length = binaryString.length;
+    const bytes = new Uint8Array(length);
+    for (let i = 0; i < length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes;
   }
 
   insertProduct(product: Product): Observable<any> {
@@ -172,8 +220,10 @@ export class NavigationService {
 
 
   updateProduct(product: Product): Observable<any> {
-    return this.http.put<any>(`${this.baseurl}UpdateProduct/${product.id}`, product);
+    return this.http.put<any>(`${this.baseurl}EditProduct/${product.id}`, product);
   }
+
+
 
 
 }

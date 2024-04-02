@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
+using System.Net;
 
 namespace ECommerce.API.Controllers
 {
@@ -58,7 +60,7 @@ namespace ECommerce.API.Controllers
         [HttpGet("GetAllProducts")]
         public IActionResult GetAllProducts()
         {
-            var result = dataAccess.GetAllProducts(); // Assuming GetAllProducts() method fetches all products from the database
+            var result = dataAccess.GetAllProducts(); 
             return Ok(result);
         }
 
@@ -92,6 +94,16 @@ namespace ECommerce.API.Controllers
             var result = dataAccess.InsertCartItem(userid, productid);
             return Ok(result ? "inserted" : "not inserted");
         }
+
+
+
+        [HttpDelete("RemoveCartItem/{cartItemId}")]
+        public IActionResult RemoveCartItem(int cartItemId)
+        {
+            var result = dataAccess.RemoveCartItem(cartItemId);
+            return Ok(result ? "removed" : "not removed");
+        }
+
 
         [HttpGet("GetActiveCartOfUser/{id}")]
         public IActionResult GetActiveCartOfUser(int id)
@@ -129,12 +141,19 @@ namespace ECommerce.API.Controllers
             return Ok(id.ToString());
         }
 
+        [HttpPost("InsertOrder")]
+        public IActionResult InsertOrder(Order order)
+        {
+            order.CreatedAt = DateTime.Now.ToString();
+            var id = dataAccess.InsertOrder(order);
+            return Ok(id.ToString());
+        }
+
 
 
         [HttpPost("InsertProduct")]
         public IActionResult InsertProduct([FromBody] Product product)
         {
-
             var result = dataAccess.InsertProduct(product);
             if (result)
             {
@@ -146,13 +165,11 @@ namespace ECommerce.API.Controllers
             }
         }
 
-
         [HttpDelete("DeleteProduct/{id}")]
         public IActionResult DeleteProduct(int id)
         {
             try
             {
-                // Call the data access layer to delete the product by its ID
                 bool result = dataAccess.DeleteProduct(id);
 
                 if (result)
@@ -170,8 +187,6 @@ namespace ECommerce.API.Controllers
             }
         }
 
-
-
         [HttpPost("EditProduct/{productId}")]
         public IActionResult EditProduct(int productId, [FromBody] Product product)
         {
@@ -186,8 +201,6 @@ namespace ECommerce.API.Controllers
             }
         }
 
-
-
         [HttpGet("GetAllUsers")]
         public IActionResult GetAllUsers()
         {
@@ -198,7 +211,6 @@ namespace ECommerce.API.Controllers
         [HttpPost("InsertUser")]
         public IActionResult AddUser([FromBody] User user)
         {
-            // You may want to perform validation on the user object before inserting
             var result = dataAccess.AddUser(user);
             if (result)
             {
@@ -238,63 +250,18 @@ namespace ECommerce.API.Controllers
             }
         }
 
-
-        [HttpPost("InsertOrder")]
-        public IActionResult InsertOrder(Order order)
+        [HttpGet("GetPayment/{paymentId}")]
+        public IActionResult GetPayment(int paymentId)
         {
-            order.CreatedAt = DateTime.Now.ToString();
-            var id = dataAccess.InsertOrder(order);
-            return Ok(id.ToString());
-        }
-
-        [HttpPost("UploadImage")]
-        public IActionResult UploadImage(IFormFile file)
-        {
-            try
+            var payment = dataAccess.GetPayment(paymentId);
+            if (payment != null)
             {
-                // Check if the file is null
-                if (file == null || file.Length == 0)
-                    return BadRequest("No file uploaded.");
-
-                var extension = Path.GetExtension(file.FileName);
-
-                var uniqueFileName = Guid.NewGuid().ToString() + extension;
-
-                var imagePath = Path.Combine("wwwroot", "images", "products", uniqueFileName);
-
-                using (var stream = new FileStream(imagePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-                var imageUrl = $"~/images/products/{uniqueFileName}";
-                return Ok(new { imageUrl });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
-            }
-        }
-
-
-        [HttpGet("GetOrder/{orderId}")]
-        public IActionResult GetOrder(int orderId)
-        {
-            var order = dataAccess.GetOrder(orderId);
-            if (order != null)
-            {
-                return Ok(order);
+                return Ok(payment);
             }
             else
             {
                 return NotFound();
             }
-        }
-
-        [HttpGet("GetAllOrders")]
-        public IActionResult GetAllOrders()
-        {
-            var orders = dataAccess.GetAllOrders();
-            return Ok(orders);
         }
 
         [HttpGet("GetPendingOrders")]
@@ -332,7 +299,6 @@ namespace ECommerce.API.Controllers
             }
         }
 
-
         [HttpGet("orders/thisweek")]
         public IActionResult GetOrdersThisWeek()
         {
@@ -360,12 +326,80 @@ namespace ECommerce.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        [HttpGet("GetPaymentMethod/{id}")]
+        public IActionResult GetPaymentMethod(int id)
+        {
+            var paymentMethod = dataAccess.GetPaymentMethodById(id);
+
+            if (paymentMethod == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(paymentMethod);
+        }
+
+        [HttpGet("GetAllProductsFlat")]
+        public IActionResult GetAllProductsFlat()
+        {
+            List<Product> products = dataAccess.GetAllProductsFlat();
+            return Ok(products);
+        }
+
+        
+
+
+
+
+        [HttpPost("UploadImage/{productId}")]
+        public IActionResult UploadImage(int productId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file");
+            }
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                file.CopyTo(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+
+                var product = dataAccess.GetProduct(productId);
+                if (product == null)
+                {
+                    return NotFound("Product not found");
+                }
+
+                product.ImageName = imageBytes;
+                var result = dataAccess.EditProduct(productId, product);
+                if (!result)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update product with image");
+                }
+            }
+
+            return Ok(new { success = true, message = "Image uploaded successfully" });
+        }
+
+
+
+
+
+        [HttpGet("GetImage/{productId}")]
+        public IActionResult GetImage(int productId)
+        {
+            var product = dataAccess.GetProduct(productId);
+            if (product == null || product.ImageName == null)
+            {
+                return NotFound("Image not found");
+            }
+
+            byte[] imageBytes = product.ImageName;
+
+            return File(imageBytes, "image/png");
+        }
     }
 
-
-
 }
-
-
-
 

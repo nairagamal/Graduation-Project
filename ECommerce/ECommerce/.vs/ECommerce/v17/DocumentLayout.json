@@ -1,0 +1,159 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|f:\\downloads\\isa\\ecommerce\\ecommerce\\ecommerce\\ecommerce.api\\controllers\\shoppingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\controllers\\shoppingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ecommerce.api\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ecommerce.api\\dataaccess\\dataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\dataaccess\\dataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ecommerce.api\\dataaccess\\idataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\dataaccess\\idataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ecommerce.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ecommerce.api\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ecommerce.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB2830CE-2729-449D-8FF7-3E7342256C61}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 1329,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataAccess.cs",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess\\DataAccess.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\DataAccess\\DataAccess.cs",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess\\DataAccess.cs",
+              "RelativeToolTip": "ECommerce.API\\DataAccess\\DataAccess.cs",
+              "ViewState": "AQIAACoBAAAAAAAAAAArwMYAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T22:16:35.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IDataAccess.cs",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess\\IDataAccess.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\DataAccess\\IDataAccess.cs",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\DataAccess\\IDataAccess.cs",
+              "RelativeToolTip": "ECommerce.API\\DataAccess\\IDataAccess.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAuwCsAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T22:16:25.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Product.cs",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Models\\Product.cs",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Models\\Product.cs",
+              "RelativeToolTip": "ECommerce.API\\Models\\Product.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAowAQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T22:12:05.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\appsettings.json",
+              "RelativeDocumentMoniker": "ECommerce.API\\appsettings.json",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\appsettings.json",
+              "RelativeToolTip": "ECommerce.API\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-31T19:37:31.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Models\\Contact.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Models\\Contact.cs",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Models\\Contact.cs",
+              "RelativeToolTip": "ECommerce.API\\Models\\Contact.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-30T05:28:45.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Models\\User.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Models\\User.cs",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Models\\User.cs",
+              "RelativeToolTip": "ECommerce.API\\Models\\User.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAswA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-30T05:22:55.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ShoppingController.cs",
+              "DocumentMoniker": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Controllers\\ShoppingController.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Controllers\\ShoppingController.cs",
+              "ToolTip": "F:\\Downloads\\ISA\\ECommerce\\ECommerce\\ECommerce\\ECommerce.API\\Controllers\\ShoppingController.cs",
+              "RelativeToolTip": "ECommerce.API\\Controllers\\ShoppingController.cs",
+              "ViewState": "AQIAAGcBAAAAAAAAAAAAAHABAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-30T01:27:28.561Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1329,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

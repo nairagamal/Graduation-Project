@@ -89,7 +89,7 @@ export class OrderComponent implements OnInit {
 
     if (!isPaymentSuccessfull) {
       this.displaySpinner = false;
-      this.message = 'Something went wrong! Payment did not happen!';
+      this.message = 'Something went wrong! Order did not happen!';
       this.classname = 'text-danger';
       return;
     }
@@ -98,15 +98,15 @@ export class OrderComponent implements OnInit {
     let count = timer(0, 3000).subscribe((res) => {
       ++step;
       if (step === 1) {
-        this.message = 'Processing Payment';
+        this.message = 'Processing Order';
         this.classname = 'text-success';
       }
       if (step === 2) {
-        this.message = 'Payment Successfull, Order is being placed.';
+        this.message = 'Order is being pending.';
         this.storeOrder();
       }
       if (step === 3) {
-        this.message = 'Your Order has been placed';
+        this.message = 'Your Order is pending';
         this.displaySpinner = false;
       }
       if (step === 4) {
@@ -153,7 +153,7 @@ export class OrderComponent implements OnInit {
           cart: this.usersCart,
           payment: payment,
           createdAt: '',
-          Status: 'pending'
+          Status: 'Pending'
         };
         this.navigationService.insertOrder(order).subscribe((orderResponse) => {
           this.utilityService.changeCart.next(0);

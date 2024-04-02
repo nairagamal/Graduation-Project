@@ -1,132 +1,75 @@
-<style>
-  .btn-link {
-    text-decoration: none;
-    color: #d4d7da;
-  }
-  btn-link:hover {
-    color: rgb(79, 78, 78);
-  }
-</style>
-
-<header
-  class="w-100 h-100 bg-dark px-4 my-shadow d-flex justify-content-between align-items-center"
->
-  <div class="text-light fs-3 fw-bold fst-italic">
-    <span class="btn-link">ECommerce</span>
-  </div>
-
-  <div class="btn-toolbar" role="toolbar">
-    <div class="btn-group btn-group-lg me-3" role="group">
-      <a href="/home" class="btn btn-outline-light btn-link">Home</a>
-      <a (click)="gotoabout()" class="btn btn-outline-light btn-link"
-        >About Us</a
-      >
-      <div class="btn-group" role="group">
-        <button
-          type="button"
-          class="btn btn-outline-light dropdown-toggle"
-          data-bs-toggle="dropdown"
-        >
-          Categories
-        </button>
-        <ul class="dropdown-menu fs-5">
-          <ng-container *ngFor="let item of navigationList; let i = index">
-            <li
-              *ngFor="let subcategory of item.subcategories"
-              [style.cursor]="'pointer'"
-            >
-              <a
-                class="dropdown-item"
-                OpenProducts
-                [category]="{
-                  id: 0,
-                  category: item.category,
-                  subCategory: subcategory
-                }"
-              >
-                {{ subcategory }}
-              </a>
-            </li>
-            <li *ngIf="i !== navigationList.length - 1">
-              <hr class="dropdown-divider" />
-            </li>
-          </ng-container>
-        </ul>
-      </div>
+<header class="w-100 h-100 bg-dark px-4 my-shadow d-flex justify-content-between align-items-center">
+    <div class="text-light logo fw-bold">
+        <span>ELECTRO</span>STORE
     </div>
 
-    <div class="btn-group btn-group-lg me-2" role="group">
-      <button
-        type="button"
-        class="btn btn-outline-light btn-link"
-        data-bs-toggle="modal"
-        data-bs-target="#generalmodal"
-        (click)="openModal('login')"
-        *ngIf="!utilityService.isLoggedIn()"
-      >
-        Login
-      </button>
-      <button
-        type="button"
-        class="btn btn-outline-light btn-link"
-        data-bs-toggle="modal"
-        data-bs-target="#generalmodal"
-        (click)="openModal('register')"
-        *ngIf="!utilityService.isLoggedIn()"
-      >
-        Register
-      </button>
-      <button
-        type="button"
-        class="btn btn-outline-light btn-link"
-        *ngIf="utilityService.isLoggedIn()"
-      >
-        Account
-      </button>
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group btn-group-lg me-3" role="group">
+            <button type="button" class="btn btn-outline-light" routerLink="/home">
+                Home
+            </button>
+            <button type="button" class="btn btn-outline-light" routerLink="/contact">Contact</button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                    Categories
+                </button>
+                <ul class="dropdown-menu fs-5">
+                    <ng-container *ngFor="let item of navigationList; let i = index">
+                        <li *ngFor="let subcategory of item.subcategories" [style.cursor]="'pointer'">
+                            <a class="dropdown-item" OpenProducts [category]="{
+                      id: 0,
+                      category: item.category,
+                      subCategory: subcategory
+                    }">
+                                {{ subcategory | titlecase }}
+                            </a>
+                        </li>
+                        <li *ngIf="i !== navigationList.length - 1">
+                            <hr class="dropdown-divider" />
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
 
-      <a
-        href="/cart"
-        class="btn btn-outline-light btn-link"
-        *ngIf="utilityService.isLoggedIn()"
-        >Cart</a
-      >
-      <a
-        href="/orders"
-        class="btn btn-outline-light btn-link"
-        *ngIf="utilityService.isLoggedIn()"
-        >Orders</a
-      >
-      <button
-        type="button"
-        class="btn btn-outline-light btn-link"
-        (click)="utilityService.logoutUser()"
-        *ngIf="utilityService.isLoggedIn()"
-      >
-        Logout
-      </button>
+        <div class="btn-group btn-group-lg me-2" role="group">
+            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#generalmodal"
+                (click)="openModal('login')" *ngIf="!utilityService.isLoggedIn()">
+                Login
+            </button>
+            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#generalmodal"
+                (click)="openModal('register')" *ngIf="!utilityService.isLoggedIn()">
+                Register
+            </button>
+            <!-- <button type="button" class="btn btn-outline-light" *ngIf="utilityService.isLoggedIn()">
+                Account
+            </button> -->
+
+            <button type="button" class="btn btn-outline-light" routerLink="/cart" *ngIf="utilityService.isLoggedIn()">
+                Cart
+                <span class="badge bg-warning text-dark">{{cartItems}}</span>
+            </button>
+            <button type="button" class="btn btn-outline-light" routerLink="/randomProducts"
+                *ngIf="utilityService.isLoggedIn()">
+               Products
+            </button>
+            <button type="button" class="btn btn-outline-light" (click)="utilityService.logoutUser()"
+            routerLink="/home"   *ngIf="utilityService.isLoggedIn()">
+                Logout
+            </button>
+        </div>
+        <div class="modal fade" id="generalmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" #modalTitle></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ng-container #container></ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </header>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="generalmodal"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" #modalTitle></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal">
-          nn
-        </button>
-      </div>
-      <div class="modal-body">
-        <ng-container #container></ng-container>
-      </div>
-    </div>
-  </div>
-</div>

@@ -42,7 +42,7 @@ export interface Product {
   offer: Offer;
   price: number;
   quantity: number;
-  imageName: string;
+  imageName: Uint8Array;
 }
 
 export interface Review {

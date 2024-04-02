@@ -1,0 +1,13 @@
+table,
+tr,
+thead,
+tbody,
+td,
+th {
+    background: none;
+    color: #fff;
+    text-align: center;
+}
+ .displayimg{
+    width: 150px;
+} 

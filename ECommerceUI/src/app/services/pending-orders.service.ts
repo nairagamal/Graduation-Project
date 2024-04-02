@@ -20,12 +20,15 @@ export class PendingOrdersService {
   acceptOrder(orderId: number): Observable<any> {
     return this.http.put(`${this.Url}/${orderId}/accept`, {}, { responseType: 'text' });
   }
-
+  
   rejectOrder(orderId: number): Observable<any> {
     return this.http.put(`${this.Url}/${orderId}/reject`, {}, { responseType: 'text' });
-  }
+  } 
 
   getPendingOrdersThisWeek(): Observable<Order[]> {
     return this.http.get<Order[]>(this.thisWeekUrl);
   }
 }
+  
+
+

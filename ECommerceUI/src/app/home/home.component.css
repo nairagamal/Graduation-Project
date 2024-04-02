@@ -1,5 +1,167 @@
-.product-baner button {
-  position: absolute;
-  top: 50%;
-  left: 20%;
-}
+ * {
+     color: #fff;
+     text-transform: uppercase;
+ }
+
+ .shadows-into light-regular {
+     font-family: "Shadows Into Light", cursive;
+     font-weight: 400;
+     font-style: normal;
+ }
+
+ .pacifico-regular {
+     font-family: "Pacifico", cursive;
+     font-weight: 400;
+     font-style: normal;
+ }
+
+ .signika-israa {
+     font-family: "Signika", sans-serif;
+     font-optical-sizing: auto;
+     font-style: normal;
+     font-variation-settings:
+         "GRAD" 0;
+ }
+
+ .banner {
+     margin: -16px -15px 0px -17px !important;
+     padding: 50px;
+     box-sizing: border-box;
+     height: 500px;
+ }
+
+ .banner .bannerImg {
+     width: 95%;
+ }
+
+ .col-8 {
+     padding-top: 30px;
+     padding-left: 30px;
+ }
+
+ .col-8 button {
+     margin-top: 30px;
+     font-weight: bold;
+ }
+
+ p {
+     color: rgb(190, 190, 190);
+ }
+
+ .paragraph {
+     color: rgb(190, 190, 190);
+     max-width: 600px;
+ }
+
+ .welcome-container {
+     text-align: center;
+     margin-top: 100px;
+ }
+
+ .welcome span {
+     opacity: 0;
+     display: inline-block;
+     animation: fadeIn 1s ease forwards infinite;
+ }
+
+ .welcome span:nth-child(1) {
+     animation-delay: 0.1s;
+ }
+
+ .welcome span:nth-child(2) {
+     animation-delay: 0.2s;
+ }
+
+ .welcome span:nth-child(3) {
+     animation-delay: 0.3s;
+ }
+
+ .welcome span:nth-child(4) {
+     animation-delay: 0.4s;
+ }
+
+ .welcome span:nth-child(5) {
+     animation-delay: 0.5s;
+ }
+
+ .welcome span:nth-child(6) {
+     animation-delay: 0.6s;
+ }
+
+ .welcome span:nth-child(7) {
+     animation-delay: 0.7s;
+ }
+
+ @keyframes fadeIn {
+     to {
+         opacity: 1;
+     }
+ }
+
+ .card {
+     text-align: center;
+     background: none;
+     border: 1px solid gray;
+     justify-content: center;
+     align-items: center;
+     padding: 10px;
+     height: 500px;
+ }
+
+ .card img {
+     text-align: center;
+     width: 70%;
+     padding-top: 10px;
+ }
+
+ .card img:hover {
+     width: 71%;
+ }
+
+ .cardbtn {
+     padding-bottom: 25px;
+ }
+
+ .card button {
+     font-weight: bold;
+     font-size: 18px;
+ }
+
+ .carousel-inner .carousel-item img {
+     width: 250px !important;
+ }
+
+ #carouselExampleIndicators {
+     height: 450px;
+     padding: 100px 200px;
+ }
+
+ .carousel-item .row,
+ .carousel-content,
+ .carousel-inner,
+ .carousel-item,
+ .col-md-8,
+ .carousel-content h3,
+ .carousel-content p,
+ .col-md-4 img,
+ .col-md-4,
+ #carouselExampleIndicators,
+ #slider {
+     /* background-color: #212529 !important; */
+      background: none;  
+ }
+
+
+ :host ::ng-deep .carousel-control-prev-icon,
+ :host ::ng-deep .carousel-control-next-icon {
+     fill: #ffffff !important; 
+ }
+ #slider {
+     /* background: linear-gradient(to right, #2c2c2c, #3a3a3a); */
+     margin: 0 !important;
+     padding: 0 !important;
+ }
+
+ .carousel-item {
+     transition: transform 1s ease;
+ }

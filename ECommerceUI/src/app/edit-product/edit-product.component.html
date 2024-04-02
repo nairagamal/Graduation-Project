@@ -1,7 +1,8 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Edit Product</h5>
-    <form (ngSubmit)="onSaveChanges()">
+    <h3 class="card-title text-light">Edit Product</h3>
+    <hr>
+    <div (ngSubmit)="onSaveChanges()">
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" required [(ngModel)]="editedProduct.title" name="title">
@@ -26,9 +27,10 @@
         <label for="image">Image URL</label>
         <input type="text" class="form-control" id="image" [(ngModel)]="editedProduct.imageName" name="image">
       </div>
-
-      <button type="submit" class="btn btn-primary">Save Changes</button>
-      <button type="button" class="btn btn-secondary ml-2" (click)="onCancelEdit()">Cancel</button>
-    </form>
+<div class="d-flex my-3">
+      <button type="submit" class="btn btn-dark w-50" (click) ="onSaveChanges">Save Changes</button>
+      <button type="button" class="btn btn-secondary ml-2 w-50" (click)="onCancelEdit()">Cancel</button>
+    </div>
+  
   </div>
 </div>

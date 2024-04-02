@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationService } from '../services/navigation.service';
 import { UtilityService } from '../services/utility.service';
 
@@ -15,43 +16,38 @@ import { UtilityService } from '../services/utility.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('exampleModal') modal!: ElementRef; // Initialize modal property
+
   loginForm!: FormGroup;
-  message = '';
+  emailFocused: boolean = false;
+  showPasswordError: boolean = false;
+  message: string = '';
+  passwordInput: { focused: boolean } = { focused: false };
+
   constructor(
     private fb: FormBuilder,
     private navigationService: NavigationService,
     private utilityService: UtilityService,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      pwd: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(15),
-        ],
-      ],
+      pwd: ['', [Validators.required, Validators.minLength(6)]],
     });
-    this.resetForm();
   }
 
   login() {
     if (this.loginForm.valid) {
-      const email = this.Email.value;
-      const password = this.PWD.value;
+      const email = this.Email?.value;
+      const password = this.PWD?.value;
 
-      // Check if email and password match the admin credentials
       if (email === 'admin@gmail.com' && password === '123456') {
-        // Redirect to admin component
-        this.router.navigate(['/admin']);
-        return; // Exit the function to prevent further execution
+        this.router.navigate(['/admin/user-management']);
+        return;
       }
-
-      // If not admin credentials, proceed with regular login
       this.navigationService
         .loginUser(email, password)
         .subscribe((res: any) => {
@@ -59,22 +55,35 @@ export class LoginComponent implements OnInit {
             this.message = 'Logged In Successfully.';
             this.utilityService.setUser(res.toString());
             console.log(this.utilityService.getUser());
-            this.router.navigate(['/home']); // Redirect to home page
+            this.router.navigate(['/home']);
           } else {
-            this.message = 'Invalid Email or Paswword';
+            this.message = 'Invalid Credentials!';
           }
         });
     }
   }
-
-  resetForm() {
-    this.loginForm.reset();
+  openModal() {
+    this.renderer.addClass(document.body, 'modal-open'); // Add 'modal-open' class to body
+  }
+  get Email() {
+    return this.loginForm.get('email');
   }
 
-  get Email(): FormControl {
-    return this.loginForm.get('email') as FormControl;
+  get PWD() {
+    return this.loginForm.get('pwd');
   }
-  get PWD(): FormControl {
-    return this.loginForm.get('pwd') as FormControl;
+
+  redirectToGmail() {
+    // Redirect to Gmail
+    window.location.href = 'https://mail.google.com';
+  }
+  sendVerificationCode() {
+    const email = this.Email?.value;
+
+    // Send verification code logic
+    // For demonstration purposes, let's assume the verification code is sent successfully
+    console.log('Sending verification code to:', email);
+    // You can add your logic here to send the verification code to the user's email
+    // After sending the code, you might want to navigate the user to a page where they can enter the code for password reset
   }
 }

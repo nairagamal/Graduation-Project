@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationService } from '../services/navigation.service';
 import { Product } from '../models/models';
 
@@ -10,12 +10,15 @@ import { Product } from '../models/models';
 })
 export class EditProductComponent implements OnInit {
   @Input() productId!: number;
-  @Output() saveChanges: EventEmitter<Product> = new EventEmitter<Product>();
   @Output() cancelEdit: EventEmitter<void> = new EventEmitter<void>();
 
   editedProduct!: Product;
 
-  constructor(private route: ActivatedRoute, private navigationService: NavigationService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private navigationService: NavigationService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -27,7 +30,13 @@ export class EditProductComponent implements OnInit {
   }
 
   onSaveChanges(): void {
-    this.saveChanges.emit(this.editedProduct);
+    this.navigationService.updateProduct(this.editedProduct).subscribe(() => {
+      // Product updated successfully, navigate to add-product route
+      this.router.navigate(['/admin/add-product']);
+    }, error => {
+      // Handle error if product update fails
+      console.error('Error updating product:', error);
+    });
   }
 
   onCancelEdit(): void {

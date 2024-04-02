@@ -127,97 +127,281 @@ D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.AP
 D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
 D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
 D:\Naira Gamal\Final Project\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.sourcelink.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.sourcelink.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CopyComplete
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
-D:\New folder\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.sourcelink.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CopyComplete
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
-D:\ITI Graduation\Graduation-Project\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.sourcelink.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CopyComplete
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
+D:\important files\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.sourcelink.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerc.203F780B.Up2Date
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
+F:\Downloads\ISA\22-09-25 ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerc.203F780B.Up2Date
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
+F:\Downloads\ISA\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CopyComplete
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
+D:\ITI\Graduation Project\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerc.203F780B.Up2Date
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
+F:\Downloads\ISA\sosii\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.Development.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\appsettings.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.exe
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.deps.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.runtimeconfig.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\ECommerce.API.pdb
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.AssemblyReference.cache
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfoInputs.cache
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.AssemblyInfo.cs
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CoreCompileInputs.cache
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.MvcApplicationPartsAssemblyInfo.cache
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.build.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.development.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.ECommerce.API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.build.ECommerce.API.props
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ECommerce.API.props
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ECommerce.API.props
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\staticwebassets.pack.json
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\scopedcss\bundle\ECommerce.API.styles.css
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.csproj.CopyComplete
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\refint\ECommerce.API.dll
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.pdb
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ECommerce.API.genruntimeconfig.cache
+D:\Naira Gamal\Israa\ECommerce\ECommerce\ECommerce\ECommerce.API\obj\Debug\net6.0\ref\ECommerce.API.dll

@@ -21,7 +21,7 @@ export class SuggestedProductsComponent implements OnInit {
   ngOnInit(): void {
     this.navigationService
     .getProducts(
-      this.category.category,
+      this.category.subCategory,
       this.category.subCategory,
       this.count
     )

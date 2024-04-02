@@ -1,6 +1,4 @@
-main {
-  margin-top: 4rem;
-  padding: 2rem;
-  min-height: calc(100vh - 8rem);
-  z-index: 1;
+table, tr, thead, tbody, td, th{
+    background: none;
+    color: #fff;
 }

@@ -1,0 +1,21 @@
+<h2>Produtcs</h2>
+<div class="my-container mx-auto">
+  <div class="row g-4">
+    <!-- Displaying Products -->
+    <div class="col-md-4" *ngFor="let product of products">
+      <div class="card">
+        <!-- Product Image -->
+        <img [src]="convertImageToBase64(product.imageName)" class="card-img-top" alt="Product Image">
+
+        <div class="card-body">
+          <!-- Product Title -->
+          <h5 class="card-title">{{ product.title }}</h5>
+          <!-- Product Price -->
+          <p class="card-text">{{ utilityService.applyDiscount(product.price, product.offer.discount) | currency }}</p>
+          <!-- Add to Cart Button -->
+          <button class="btn btn-primary" [disabled]="!utilityService.isLoggedIn()" (click)="utilityService.addToCart(product)">Add to Cart<span *ngIf="!utilityService.isLoggedIn()" class="text-danger" class="btn btn-primary">(Login First)</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

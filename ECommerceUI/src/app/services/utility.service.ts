@@ -19,7 +19,7 @@ export class UtilityService {
   constructor(
     private navigationService: NavigationService,
     private jwt: JwtHelperService,
-    private http: HttpClient ,// Inject HttpClient
+    private http: HttpClient ,
 
   ) {}
 
@@ -27,8 +27,6 @@ export class UtilityService {
     let finalPrice: number = price - price * (discount / 100);
     return finalPrice;
   }
-
-  // JWT Helper Service : npm install @auth0/angular-jwt
 
   getUser(): User {
     let token = this.jwt.decodeToken();

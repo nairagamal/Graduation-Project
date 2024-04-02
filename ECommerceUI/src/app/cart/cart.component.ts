@@ -65,25 +65,31 @@ export class CartComponent implements OnInit {
   }
 
   // Assuming these changes are made within the removeCartItem method
-removeCartItem(cartItem: any): void {
-  const index = this.usersCart.cartItems.findIndex(item => item === cartItem);
+  removeCartItem(cartItem: any): void {
+    const index = this.usersCart.cartItems.findIndex(item => item === cartItem);
 
-  if (index !== -1) {
-    this.usersCart.cartItems.splice(index, 1);
+    if (index !== -1) {
+      const cartItemId = cartItem.id; // Assuming 'id' is the property representing the ID of the cart item
+      // Remove the item from the local cart
+      this.usersCart.cartItems.splice(index, 1);
 
-    this.navigationService.removeCartItemFromBackend(cartItem).subscribe(
-      (response: any) => { // Specify the type of 'response'
-        console.log('Item removed successfully from backend.');
-      },
-      (error: any) => { // Specify the type of 'error'
-        console.error('Error removing item from backend:', error);
-      }
-    );
+      // Remove the item from the backend
+      this.navigationService.removeCartItem(cartItemId).subscribe(
+        (response: any) => {
+          console.log('Item removed successfully from backend.');
+        },
+        (error: any) => {
+          console.error('Error removing item from backend:', error);
+        }
+      );
 
-    this.utilityService.calculatePayment(
-      this.usersCart,
-      this.usersPaymentInfo
-    );
-  } }
+      // Recalculate the payment
+      this.utilityService.calculatePayment(
+        this.usersCart,
+        this.usersPaymentInfo
+      );
+    }
+  }
+
 
 }

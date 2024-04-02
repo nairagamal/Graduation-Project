@@ -1,5 +1,6 @@
+import { NavigationService } from './../services/navigation.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Product, Category, Offer } from '../models/models';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -26,23 +27,24 @@ export class AddProductComponent implements OnInit {
     },
     price: 0,
     quantity: 0,
-    imageName: '',
+    imageName: new Uint8Array() ,
   };
 
   categories: Category[] = [];
   offers: Offer[] = [];
-  selectedImage: string | ArrayBuffer | null = null;
   productToEdit: Product | null = null;
-
-  constructor(private http: HttpClient , private router: Router) { }
-
+  showAddForm: boolean = false;
   addedProducts: Product[] = [];
+  imageSrc: string = ''; 
+  imageData: ArrayBuffer | null = null; 
+  constructor(private http: HttpClient, private router: Router, private navigationService: NavigationService) { }
 
   ngOnInit(): void {
     this.fetchCategories();
     this.fetchOffers();
     this.fetchProducts();
   }
+
 
   fetchCategories(): void {
     this.http.get<Category[]>('https://localhost:7149/api/Shopping/GetCategoryList')
@@ -67,37 +69,41 @@ export class AddProductComponent implements OnInit {
         }
       );
   }
-
   fetchProducts(): void {
-    // Fetch all products from the database
     this.http.get<Product[]>('https://localhost:7149/api/Shopping/GetAllProducts')
       .subscribe(
         (response: Product[]) => {
-          this.addedProducts = response; // Assign fetched products to addedProducts array
+          this.addedProducts = response;
+          this.addedProducts.forEach(product => {
+            this.getImageData(product.id);
+          });
         },
         (error) => {
           console.error('Error fetching products:', error);
-        },
-        () => {
-
-
         }
       );
   }
 
- 
-
-
-  onImageSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.selectedImage = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
+  getImageData(productId: number): void {
+    this.navigationService.getImageData(productId).subscribe(
+      (data: ArrayBuffer) => {
+        const productIndex = this.addedProducts.findIndex(product => product.id === productId);
+        if (productIndex !== -1) {
+          this.addedProducts[productIndex].imageName = new Uint8Array(data);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error fetching image data:', error);
+      }
+    );
   }
+  
+  convertImageToBase64(imageData: Uint8Array): string {
+    const binaryString = imageData.reduce((data, byte) => data + String.fromCharCode(byte), '');
+    return 'data:image/png;base64,' + btoa(binaryString);
+  }
+  
+
 
   onSubmit(): void {
     const httpOptions = {
@@ -106,34 +112,26 @@ export class AddProductComponent implements OnInit {
       })
     };
 
-    // Assuming you want to send the image name along with product data
-    const productData = {
-      ...this.product,
-      imageName: this.product.imageName // Update imageName property with uploaded image name
-    };
-
-    this.http.post('https://localhost:7149/api/Shopping/InsertProduct', productData, httpOptions)
+    this.http.post('https://localhost:7149/api/Shopping/InsertProduct', this.product, httpOptions)
       .subscribe(
         (response) => {
           console.log('Product added successfully:', response);
           alert('Product inserted successfully'); // Show success message
-         // this.resetForm(); // Reset the form after successful submission
         },
         (error) => {
           console.error('Error adding product:', error);
           alert('Error adding product. Please try again.'); // Show error message
-          // Log the error object for further inspection
-          console.error('Error object:', error);
+          console.error('Error object:', error); // Log the error object for further inspection
         }
       );
     this.addedProducts.push(this.product);
   }
 
+  
   deleteProduct(productId: number): void {
     const index = this.addedProducts.findIndex(product => product.id === productId);
 
     if (index !== -1) {
-
       this.http.delete(`https://localhost:7149/api/Shopping/DeleteProduct/${productId}`)
         .subscribe(
           () => {
@@ -148,15 +146,66 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-
-  // Method to edit a product
-  editProduct(productId: number): void {
-    // Redirect to the edit page with the selected product ID
-    this.router.navigate(['/edit', productId]);
+  toggleAddForm(): void {
+    this.showAddForm = !this.showAddForm;
+    if (!this.showAddForm) {
+      this.resetForm();
+    }
   }
 
-  // Method to cancel editing
+  resetForm(): void {
+    this.product = {
+      id: 0,
+      title: '',
+      description: '',
+      productCategory: {
+        id: 0,
+        category: '',
+        subCategory: ''
+      },
+      offer: {
+        id: 0,
+        title: '',
+        discount: 0
+      },
+      price: 0,
+      quantity: 0,
+      imageName: new Uint8Array(),
+    };
+  }
+
+  editProduct(productId: number): void {
+    const selectedProduct = this.addedProducts.find(product => product.id === productId);
+    if (selectedProduct) {
+      this.productToEdit = { ...selectedProduct };
+    }
+  }
+
   cancelEdit(): void {
     this.productToEdit = null;
+  }
+
+  onEdit(): void {
+    if (this.productToEdit) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+
+      this.http.post(`https://localhost:7149/api/Shopping/EditProduct/${this.productToEdit.id}`, this.productToEdit, httpOptions)
+        .subscribe(
+          () => {
+            console.log('Product updated successfully');
+            alert('Product updated successfully');
+            this.cancelEdit();
+            this.fetchProducts();
+          },
+          (error) => {
+            console.error('Error updating product:', error);
+            alert('Error updating product. Please try again.');
+          }
+        );
+    }
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SuggestedProduct } from '../models/models';
+import { NavigationService } from '../services/navigation.service';
+import { Product } from '../models/models';
+import { UtilityService } from '../services/utility.service';
 
 @Component({
   selector: 'app-home',
@@ -7,34 +9,59 @@ import { SuggestedProduct } from '../models/models';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  suggestedProducts: SuggestedProduct[] = [
-    // {
-    //   banerimage: 'Baner/naira.jpg',
-    //   category: {
-    //     id: 0,
-    //     category: 'electronics',
-    //     subCategory: 'mobiles',
-    //   },
-    // },
-    {
-      banerimage:
-        'Baner/Premium Vector _ Ramadan sale banner template background.jpeg',
-      category: {
-        id: 1,
-        category: 'electronics',
-        subCategory: 'laptops',
-      },
-    },
-    // {
-    //   banerimage: 'Baner/c6fc8237-dc0b-459d-84d5-d4937fd26c91.jpeg',
-    //   category: {
-    //     id: 1,
-    //     category: 'furniture',
-    //     subCategory: 'chairs',
-    //   },
-    // },
-  ];
-  constructor() {}
+  products: Product[] = [];
 
-  ngOnInit(): void {}
+  constructor(private navigationService: NavigationService,public utilityService: UtilityService) {}
+
+  ngOnInit(): void {
+    this.fetchFirstThreeProducts();
+    this.getAllProducts();
+  }
+
+  fetchFirstThreeProducts(): void {
+    this.navigationService.getAllProducts().subscribe(
+      (products: Product[]) => {
+        // Slice the array to get the first three products
+        this.products = products.slice(0, 3);
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
+  }
+
+
+  getAllProducts(): void {
+    this.navigationService.getAllProductsFlat().subscribe(
+      (products: Product[]) => {
+        // Slice the array to get only the first three products
+        this.products = products.slice(0, 3);
+
+        // Fetch image data for each product
+        this.products.forEach(product => {
+          this.getImageData(product);
+        });
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
+  }
+
+
+  getImageData(product: Product): void {
+    this.navigationService.getImageData(product.id).subscribe(
+      (data: ArrayBuffer) => {
+        product.imageName = new Uint8Array(data); // Store binary image data
+      },
+      (error) => {
+        console.error('Error fetching image data:', error);
+      }
+    );
+  }
+
+  convertImageToBase64(imageData: Uint8Array): string {
+    const binaryString = imageData.reduce((data, byte) => data + String.fromCharCode(byte), '');
+    return 'data:image/png;base64,' + btoa(binaryString);
+  }
 }

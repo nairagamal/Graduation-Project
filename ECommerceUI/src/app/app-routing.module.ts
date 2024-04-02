@@ -11,16 +11,20 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { UserManagementComponent } from './user-management/user-management.component';
-import { AddProductComponent } from './add-product/add-product.component';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
-import { AdminReportsComponent } from './admin-reports/admin-reports.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ContactComponent } from './contact/contact.component';
+import { RandomProductComponent } from './random-product/random-product.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'product-details', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: OrderComponent },
+  { path: 'randomProducts', component: RandomProductComponent },
   { path: 'edit/:productId', component: EditProductComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminDashboardComponent },
@@ -31,12 +35,9 @@ const routes: Routes = [
       { path: 'user-management', component: UserManagementComponent },
       { path: 'admin-order', component: AdminOrderComponent },
       { path: 'add-product', component: AddProductComponent },
-      { path: 'admin-reports', component: AdminReportsComponent }
+
     ]
   },
-  // { path: 'app-user-management', component: UserManagementComponent },
-  // { path: 'AdminOrder', component: AdminOrderComponent },
-  // { path: 'add-product', component: AddProductComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
   { path: 'suggest', component: SuggestedProductsComponent },

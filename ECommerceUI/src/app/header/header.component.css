@@ -1,12 +1,59 @@
 :host {
-  display: block;
-  height: 4rem;
-  width: 100%;
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  z-index: 20;
+    display: block;
+    height: 4rem;
+    width: 100%;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    z-index: 20;
 }
-.btn-toolbar {
-  justify-content: center; /* Ensure this is a flex container if not already */
+
+header{
+    padding: 30px 0;
 }
+header .logo{
+    font-size: 22px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* background: none; */
+}
+header .logo span{
+    color: rgb(173, 173, 173);
+    background: none;
+}
+.nav .nav-link{
+font-size: 18px;
+font-weight: bold;
+text-transform: uppercase;
+background: none;
+}
+.nav li{
+    padding-left: 50px;
+    background: none;
+}
+.active-link{
+    border: 1px solid #fff;
+}
+button{
+    background: none;
+}
+.btn-toolbar{
+    background: none;
+}
+ul li a{
+    color: #fff;
+}
+ul li{
+    background-color: black;
+}
+ng-container li hr{
+    background-color: black;
+    color: #fff;
+}
+ul li a:hover{
+    color: black;
+}
+ul li a:focus{
+background-color: #fff;
+}
+
+

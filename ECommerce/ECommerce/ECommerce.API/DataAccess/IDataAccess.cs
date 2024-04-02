@@ -19,6 +19,7 @@ namespace ECommerce.API.DataAccess
         Cart GetActiveCartOfUser(int userid);
         Cart GetCart(int cartid);
         List<Cart> GetAllPreviousCartsOfUser(int userid);
+        PaymentMethod GetPaymentMethodById(int id);
         List<PaymentMethod> GetPaymentMethods();
         int InsertPayment(Payment payment);
         int InsertOrder(Order order);
@@ -39,5 +40,11 @@ namespace ECommerce.API.DataAccess
         void RejectOrder(int orderId);
         List<Order> GetOrdersThisWeek();
         List<Order> GetOrdersLastMonth();
+        List<Product> GetAllProductsFlat();
+        string GetProductImage(int id);
+        void SaveImageData(int productId, byte[] imageData);
+
+        bool RemoveCartItem(int cartItemId);
+
     }
 }

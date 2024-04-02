@@ -20,15 +20,16 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { JwtModule } from '@auth0/angular-jwt';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { AdminProductComponent } from './admin-product/admin-product.component';
 import { UserManagementComponent } from './user-management/user-management.component';
-import { AdminReportsComponent } from './admin-reports/admin-reports.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactComponent } from './contact/contact.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { RandomProductComponent } from './random-product/random-product.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdminReportsComponent } from './admin-reports/admin-reports.component';
     AdminOrderComponent,
     AdminProductComponent,
     UserManagementComponent,
-    AdminReportsComponent,
+    ContactComponent,
+    RandomProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ import { AdminReportsComponent } from './admin-reports/admin-reports.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

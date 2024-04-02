@@ -1,6 +1,12 @@
-main {
-  margin-top: 4rem;
-  padding: 2rem;
-  min-height: calc(100vh - 8rem);
-  z-index: 1;
+.items{
+    background-color: black;
+    border: 1px solid #535353;
+}
+.previous{
+    background-color: black;
+    color: #fff;
+}
+table, tr, thead, tbody, td, th{
+    background: none;
+    color: #fff;
 }

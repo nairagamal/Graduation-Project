@@ -1,59 +1,4 @@
-
-<form (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" required [(ngModel)]="product.title" name="title">
-    <div *ngIf="!product.title" class="invalid-feedback">Title is required.</div>
-  </div>
-
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea class="form-control" id="description" required [(ngModel)]="product.description" name="description"></textarea>
-    <div *ngIf="!product.description" class="invalid-feedback">Description is required.</div>
-  </div>
-
-  <div class="form-group">
-    <label for="category">Category</label>
-    <select class="form-control" [(ngModel)]="product.productCategory.id" name="category">
-      <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
-    </select>
-    <div *ngIf="!product.productCategory.id" class="invalid-feedback">Category is required.</div>
-  </div>
-
-  <div class="form-group">
-    <label for="offer">Offer</label>
-    <select class="form-control" [(ngModel)]="product.offer.id" name="offer">
-      <option *ngFor="let offer of offers" [value]="offer.id">{{ offer.title }}</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="price">Price</label>
-    <input type="number" class="form-control" id="price" required [(ngModel)]="product.price" name="price">
-    <div *ngIf="!product.price" class="invalid-feedback">Price is required.</div>
-  </div>
-
-  <div class="form-group">
-    <label for="quantity">Quantity</label>
-    <input type="number" class="form-control" id="quantity" required [(ngModel)]="product.quantity" name="quantity">
-    <div *ngIf="!product.quantity" class="invalid-feedback">Quantity is required.</div>
-  </div>
-
-  <div class="form-group">
-    <label for="image">Image URL</label>
-    <input type="text" class="form-control" id="image" [(ngModel)]="product.imageName" name="image">
-    <div *ngIf="!product.imageName" class="invalid-feedback">Image URL is required.</div>
-    <img *ngIf="product.imageName" [src]="product.imageName" class="img-fluid mt-2" alt="Selected Image">
-  </div>
-
-  <br>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-
-
-
-<!-- Table to display added products -->
+<h2>Product Management</h2>
 <table class="table mt-4">
   <thead>
     <tr>
@@ -72,15 +17,331 @@
       <td>{{ addedProduct.price }}</td>
       <td>{{ addedProduct.quantity }}</td>
       <td>
-        <img [src]="addedProduct.imageName" alt="{{ addedProduct.title }}" class="img-thumbnail" style="max-height: 100px; max-width: 100px;">
+        <img [src]="convertImageToBase64(addedProduct.imageName)" alt="Product Image" class="displayimg">
       </td>
       <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteProduct(addedProduct.id)">Delete</button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteProduct(addedProduct.id)">
+          Delete
+        </button>
       </td>
       <td>
-        <button class="btn btn-success btn-sm" (click)="editProduct(addedProduct.id)">Edit</button>
+        <button
+          class="btn btn-success btn-sm"
+          (click)="editProduct(addedProduct.id)"
+        >
+          Edit
+        </button>
       </td>
-
     </tr>
   </tbody>
 </table>
+
+<form *ngIf="productToEdit" (ngSubmit)="onEdit()" #editForm="ngForm" novalidate>
+  <div class="form-group">
+    <label for="editTitle">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="editTitle"
+      required
+      [(ngModel)]="productToEdit.title"
+      name="editTitle"
+      #editTitle="ngModel"
+    />
+    <div
+      *ngIf="editTitle.invalid && (editTitle.dirty || editTitle.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editTitle.errors?.['required']" style="color: red;">Title is required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="editDescription">Description</label>
+    <textarea
+      class="form-control"
+      id="editDescription"
+      required
+      [(ngModel)]="productToEdit.description"
+      name="editDescription"
+      #editDescription="ngModel"
+    ></textarea>
+    <div
+      *ngIf="editDescription.invalid && (editDescription.dirty || editDescription.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editDescription.errors?.['required']" style="color: red;">Description is required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="editCategory">Category</label>
+    <select
+      class="form-control"
+      [(ngModel)]="productToEdit.productCategory.id"
+      name="editCategory"
+      required
+      #editCategory="ngModel"
+    >
+      <option value="">Select Category</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.category }}
+      </option>
+    </select>
+    <div
+      *ngIf="editCategory.invalid && (editCategory.dirty || editCategory.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editCategory.errors?.['required']" style="color: red;">Category is required.</div>
+    </div>
+  </div>
+
+  <!-- Offer selection -->
+  <div class="form-group">
+    <label for="editOffer">Offer</label>
+    <select
+      class="form-control"
+      [(ngModel)]="productToEdit.offer.id"
+      name="editOffer"
+      required
+      #editOffer="ngModel"
+    >
+      <option value="">Select Offer</option>
+      <option *ngFor="let offer of offers" [value]="offer.id">
+        {{ offer.title }}
+      </option>
+    </select>
+    <div
+      *ngIf="editOffer.invalid && (editOffer.dirty || editOffer.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editOffer.errors?.['required']" style="color: red;">Offer is required.</div>
+    </div>
+  </div>
+
+  <!-- Price -->
+  <div class="form-group">
+    <label for="editPrice">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="editPrice"
+      required
+      min="0.01"
+      [(ngModel)]="productToEdit.price"
+      name="editPrice"
+      #editPrice="ngModel"
+    />
+    <div
+      *ngIf="editPrice.invalid && (editPrice.dirty || editPrice.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editPrice.errors?.['required']" style="color: red;">Price is required.</div>
+      <div *ngIf="editPrice.errors?.['min']">Price must be more than 0.</div>
+    </div>
+  </div>
+
+  <!-- Quantity -->
+  <div class="form-group">
+    <label for="editQuantity">Quantity</label>
+    <input
+      type="number"
+      class="form-control"
+      id="editQuantity"
+      required
+      min="1"
+      [(ngModel)]="productToEdit.quantity"
+      name="editQuantity"
+      #editQuantity="ngModel"
+    />
+    <div
+      *ngIf="editQuantity.invalid && (editQuantity.dirty || editQuantity.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editQuantity.errors?.['required']" style="color: red;">Quantity is required.</div>
+      <div *ngIf="editQuantity.errors?.['min']">Quantity must be 1 or more.</div>
+    </div>
+  </div>
+
+  <!-- Image URL -->
+  <div class="form-group">
+    <label for="editImage">Image URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="editImage"
+      required
+      [(ngModel)]="productToEdit.imageName"
+      name="editImage"
+      #editImage="ngModel"
+    />
+    <div
+      *ngIf="editImage.invalid && (editImage.dirty || editImage.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="editImage.errors?.['required']" style="color: red;">Image URL is required.</div>
+    </div>
+    <img
+      *ngIf="productToEdit.imageName"
+      [src]="productToEdit.imageName"
+      class="img-fluid mt-2"
+      alt="Selected Image"
+    />
+  </div>
+
+
+
+
+
+
+  <br />
+  <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">
+    Update
+  </button>
+  <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">
+    Cancel
+  </button>
+</form>
+<br><br>
+
+
+
+
+
+<button class="btn btn-primary mb-3" (click)="toggleAddForm()">
+  Add Product
+</button>
+
+<form *ngIf="showAddForm" (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      required
+      [(ngModel)]="product.title"
+      name="title"
+      #title="ngModel"
+    />
+    <div
+      *ngIf="title.invalid && (title.dirty || title.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="title.errors?.['required']" style="color: red;">Title is required.</div>
+    </div>
+  </div>
+  <label>Description</label>
+  <textarea
+    class="form-control"
+    id="description"
+    required
+    [(ngModel)]="product.description"
+    name="description"
+    #description="ngModel"
+  ></textarea>
+  <div
+    *ngIf="description.invalid && (description.dirty || description.touched)"
+    class="text-danger"
+  >
+    <div *ngIf="description.errors?.['required']" style="color: red;">Description is required.</div>
+  </div>
+  <label>Category</label>
+  <select
+    class="form-control"
+    [(ngModel)]="product.productCategory.id"
+    name="category"
+    required
+    #category="ngModel"
+  >
+    <option value="">Select Category</option>
+    <option *ngFor="let category of categories" [value]="category.id">
+      {{ category.category }}
+    </option>
+  </select>
+  <div
+    *ngIf="category.invalid && (category.dirty || category.touched)"
+    class="text-danger"
+  >
+    <div *ngIf="category.errors?.['required']" style="color: red;">Category is required.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="offer">Offer</label>
+    <select class="form-control" [(ngModel)]="product.offer.id" name="offer">
+      <option *ngFor="let offer of offers" [value]="offer.id">
+        {{ offer.title }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="price"
+      required
+      min="0.01"
+      [(ngModel)]="product.price"
+      name="price"
+      #price="ngModel"
+    />
+    <div
+      *ngIf="price.invalid && (price.dirty || price.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="price.errors?.['required']" style="color: red;">Price is required.</div>
+      <div *ngIf="price.errors?.['min']" style="color: red;">Price must be more than 0.</div>
+    </div>
+  </div>
+  <label>Quantity</label>
+  <input
+    type="number"
+    class="form-control"
+    id="quantity"
+    required
+    min="1"
+    [(ngModel)]="product.quantity"
+    name="quantity"
+    #quantity="ngModel"
+  />
+  <div
+    *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)"
+    class="text-danger"
+  >
+    <div *ngIf="quantity.errors?.['required']" style="color: red;">Quantity is required.</div>
+    <div *ngIf="quantity.errors?.['min']" style="color: red;">Quantity must be 1 or more.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="image"
+      required
+      [(ngModel)]="product.imageName"
+      name="image"
+      #image="ngModel"
+    />
+    <div
+      *ngIf="image.invalid && (image.dirty || image.touched)"
+      class="text-danger"
+    >
+      <div *ngIf="image.errors?.['required']" style="color: red;">Image URL is required.</div>
+    </div>
+    <img
+      *ngIf="product.imageName"
+      [src]="product.imageName"
+      class="img-fluid mt-2"
+      alt="Selected Image"
+    />
+  </div>
+
+  <br />
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+    Submit
+  </button>
+</form>
+

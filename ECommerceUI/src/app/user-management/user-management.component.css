@@ -1,12 +1,13 @@
-.error-message {
-  color: red;
+table,
+tr,
+thead,
+tbody,
+td,
+th {
+    background: none;
+    color: #fff;
 }
 
-
-.form-group {
-  margin-bottom: 10px;
-}
-
-label {
-  margin-right: 10px;
+button {
+    margin: 5px;
 }

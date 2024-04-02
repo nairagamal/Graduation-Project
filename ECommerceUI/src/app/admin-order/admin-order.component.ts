@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Order } from '../models/models';
 import { NavigationService } from '../services/navigation.service';
 import { PendingOrdersService } from '../services/pending-orders.service';
@@ -10,7 +9,9 @@ import { PendingOrdersService } from '../services/pending-orders.service';
   styleUrls: ['./admin-order.component.css']
 })
 export class AdminOrderComponent implements OnInit {
+  
   pendingOrders: Order[] = [];
+  orderNumbers: number[] = [];
 
   constructor(private ordersService: PendingOrdersService) { }
 
@@ -19,9 +20,9 @@ export class AdminOrderComponent implements OnInit {
   }
 
   getPendingOrders() {
-
     this.ordersService.getPendingOrders().subscribe((data: any) => {
       this.pendingOrders = data;
+      this.orderNumbers = Array.from({length: this.pendingOrders.length}, (_, index) => index + 1);
     });
   }
 
